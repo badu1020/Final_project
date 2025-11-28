@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bisp1cvcg4nmd"]
+
+[ext_resource type="Texture2D" uid="uid://dtmgon41ve40a" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Asteroids/PNGs/Asteroid 01 - Base.png" id="1_v7rdw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gdqoc"]
+radius = 19.0
+
+[node name="Asteroid" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_v7rdw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gdqoc")
