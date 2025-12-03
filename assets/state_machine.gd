@@ -1,38 +1,40 @@
-class_name StateMachine extends Node
+extends Node
+class_name StateMachine
 
-@export var initial_state: State = null
-
-@onready var state: State = (func get_initial_state() -> State:
-	return initial_state if initial_state != null else get_child(0)
-).call()
-
+@export var initial_state : State
+@export var move : State
+var current_state : State
+var character : CharacterBody2D
 
 func _ready() -> void:
-	for state_node: State in find_children("*", "State"):
-		state_node.finished.connect(_transition_to_next_state)
+	character = get_parent()
+	
+	# Pass references to all child states
+	for child in get_children():
+		if child is State:
+			child.state_machine = self
+			child.character = character
 
-	await owner.ready
-	state.enter("")
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	state.handle_input(event)
-
+	current_state = initial_state
+	current_state.enter(null)
 
 func _process(delta: float) -> void:
-	state.update(delta)
-
-
-func _physics_process(delta: float) -> void:
-	state.physics_update(delta)
-
-
-func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
-	if not has_node(target_state_path):
-		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
+	if current_state == null:
 		return
 
-	var previous_state_path := state.name
-	state.exit()
-	state = get_node(target_state_path)
-	state.enter(previous_state_path, data)
+	var new_state = current_state.update(delta)
+	if new_state:
+		current_state.enter(new_state)
+
+func _input(event: InputEvent) -> void:
+	if current_state == null:
+		return
+		
+	var new_state = current_state.handle_input(event)
+	if new_state:
+		current_state.enter(new_state)
+
+#func transition_to(new_state: State) -> void:
+	#current_state.exit()
+	#new_state.enter(current_state)
+	#current_state = new_state

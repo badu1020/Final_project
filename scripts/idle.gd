@@ -3,11 +3,13 @@ class_name Idle
 
 func enter(prev_state):
 	character.velocity = Vector2.ZERO
-	character.get_node("AnimationPlayer").play("idle")
+	# Play idle animation through AnimationTree StateMachine
+	var playback = character.animation_tree.get("parameters/playback")
+	playback.travel("Idle")
 
 func handle_input(event):
-	if Input.is_action_pressed("move"):
-		return state_machine.get_node("RunState")
+	if Input.is_action_pressed("forward") or Input.is_action_pressed("back"):
+		return state_machine.get_node("move")
 	return null
 
 func update(delta):

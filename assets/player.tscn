@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq8hdl3wfm365"]
+[gd_scene load_steps=18 format=3 uid="uid://bq8hdl3wfm365"]
 
 [ext_resource type="Script" uid="uid://bb1kwonrv8i0c" path="res://player.gd" id="1_674bt"]
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
@@ -6,15 +6,35 @@
 [ext_resource type="Script" uid="uid://cghu22vi54o5k" path="res://scripts/idle.gd" id="3_insbl"]
 [ext_resource type="Texture2D" uid="uid://dh4vy3hhe86qf" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Engine Effects/PNGs/Nautolan Ship - Battlecruiser - Engine Effect.png" id="3_nsdob"]
 [ext_resource type="Texture2D" uid="uid://0piovwbgirwj" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Designs - Base/PNGs/Nautolan Ship - Battlecruiser - Base.png" id="5_nsdob"]
+[ext_resource type="Script" uid="uid://dsr26qrgswwrq" path="res://scripts/move.gd" id="6_yceh7"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nsdob"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yceh7"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uovkd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jeibo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nsdob"]
+states/Idle/node = SubResource("AnimationNodeAnimation_nsdob")
+states/Idle/position = Vector2(339, 100)
+states/move/node = SubResource("AnimationNodeAnimation_yceh7")
+states/move/position = Vector2(358, 169)
+transitions = ["Idle", "move", SubResource("AnimationNodeStateMachineTransition_uovkd"), "move", "Idle", SubResource("AnimationNodeStateMachineTransition_jeibo")]
 
 [sub_resource type="Animation" id="Animation_yceh7"]
 resource_name = "Idle"
 length = 0.4
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("main_body/engine:texture")
+tracks/0/path = NodePath("engine:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +46,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("main_body/engine:hframes")
+tracks/1/path = NodePath("engine:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -38,14 +58,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("main_body/engine:frame")
+tracks/2/path = NodePath("engine:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_uovkd"]
@@ -53,7 +73,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("main_body/engine:texture")
+tracks/0/path = NodePath("engine:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +85,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("main_body/engine:hframes")
+tracks/1/path = NodePath("engine:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,7 +97,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("main_body/engine:frame")
+tracks/2/path = NodePath("engine:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -90,11 +110,12 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_jeibo"]
 resource_name = "move"
 length = 0.4
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("main_body/engine:texture")
+tracks/0/path = NodePath("engine:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -106,7 +127,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("main_body/engine:hframes")
+tracks/1/path = NodePath("engine:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -118,14 +139,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("main_body/engine:frame")
+tracks/2/path = NodePath("engine:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jeibo"]
@@ -135,18 +156,26 @@ _data = {
 &"move": SubResource("Animation_jeibo")
 }
 
-[node name="player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsdob"]
+radius = 19.0
+height = 58.0
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("1_674bt")
+animation_tree = NodePath("AnimationTree")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_nsdob")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_jeibo")
 }
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_3mip4")
+initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_insbl")
@@ -158,8 +187,15 @@ script = ExtResource("3_insbl")
 [node name="Death" type="Node" parent="StateMachine"]
 
 [node name="move" type="Node" parent="StateMachine"]
+script = ExtResource("6_yceh7")
 
 [node name="main_body" type="Sprite2D" parent="."]
 texture = ExtResource("5_nsdob")
 
-[node name="engine" type="Sprite2D" parent="main_body"]
+[node name="engine" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -12)
+shape = SubResource("CapsuleShape2D_nsdob")
+
+[node name="Camera2D" type="Camera2D" parent="."]
