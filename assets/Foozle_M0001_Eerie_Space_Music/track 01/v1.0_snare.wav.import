@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ba3np1b3jcxn7"
+path="res://.godot/imported/v1.0_snare.wav-473a5d4ceabd55bcff8cb6717a67be72.sample"
+
+[deps]
+
+source_file="res://assets/Foozle_M0001_Eerie_Space_Music/track 01/v1.0_snare.wav"
+dest_files=["res://.godot/imported/v1.0_snare.wav-473a5d4ceabd55bcff8cb6717a67be72.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

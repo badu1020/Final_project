@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvxgc0c24alga"
+path="res://.godot/imported/v1.0_bass.wav-4f24123bdeef634d97d6fecc4b19b620.sample"
+
+[deps]
+
+source_file="res://assets/Foozle_M0001_Eerie_Space_Music/track 01/v1.0_bass.wav"
+dest_files=["res://.godot/imported/v1.0_bass.wav-4f24123bdeef634d97d6fecc4b19b620.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

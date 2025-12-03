@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://5fxghqk6xypn"
+path="res://.godot/imported/2 v1.0_pad01.wav-c686a0ade2709f3b3c248cd95c213604.sample"
+
+[deps]
+
+source_file="res://assets/Foozle_M0001_Eerie_Space_Music/track 02/2 v1.0_pad01.wav"
+dest_files=["res://.godot/imported/2 v1.0_pad01.wav-c686a0ade2709f3b3c248cd95c213604.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
