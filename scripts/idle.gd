@@ -9,7 +9,7 @@ func enter(prev_state):
 
 func handle_input(event):
 	if Input.is_action_pressed("forward") or Input.is_action_pressed("back"):
-		return state_machine.get_node("move")
+		return state_machine.get_node("Move")
 	return null
 
 func update(delta):

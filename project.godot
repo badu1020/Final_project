@@ -11,9 +11,22 @@ config_version=5
 [application]
 
 config/name="final_project"
-run/main_scene="uid://c2lwtug2pc8bi"
+run/main_scene="uid://sxpqsbattf23"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+ConfigHandler="*res://scripts/ConfigHandler.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[gui]
+
+theme/custom_font="uid://dlg6nq04rwv0y"
 
 [input]
 

@@ -2,9 +2,11 @@ extends Node
 class_name StateMachine
 
 @export var initial_state : State
-@export var move : State
+@export var Move : State
 var current_state : State
 var character : CharacterBody2D
+var state_machine
+
 
 func _ready() -> void:
 	character = get_parent()

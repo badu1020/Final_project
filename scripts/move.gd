@@ -1,26 +1,33 @@
-extends Node
-class_name move
+extends State
+class_name Move
 
-@export var move_speed : float = 150.0
 
-func update_state(character: CharacterBody2D, delta: float) -> Dictionary:
-	# Forward/back control
-	var forward := Input.get_action_strength("forward") - Input.get_action_strength("back")
 
-	# No input? Switch to idle.
-	if abs(forward) < 0.01:
-		return {
-			"state": "Idle",
-			"playback": "Idle"
-		}
+func enter(prev_state):
+	var playback = character.animation_tree.get("parameters/playback")
+	playback.travel("move")
 
-	# Move based on character rotation
-	var forward_vector := Vector2.UP.rotated(character.rotation)
-	character.velocity = forward_vector * (forward * move_speed)
+func update(delta):
+	# movement vector
+	var input_vec = Vector2(
+		Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left"),
+		Input.get_action_strength("back") - Input.get_action_strength("forward")
+	)
+
+	# if no input -> return to idle
+	if input_vec.length() < 0.1:
+		return state_machine.get_node("Idle")
+
+	# --- ROTATION (smooth turning) ---
+	var target_angle = rad_to_deg(input_vec.angle())
+	character.rotation_degrees = lerp_angle(
+		character.rotation_degrees,
+		target_angle,
+		character.rotation_speed * delta
+	)
+
+	# --- MOVEMENT ---
+	character.velocity = input_vec.normalized() * character.move_speed
 	character.move_and_slide()
 
-	# Return movement state info
-	return {
-		"state": "Move",
-		"playback": "move"
-	}
+	return null
