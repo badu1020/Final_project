@@ -127,27 +127,39 @@ offset_right = -186.0
 offset_bottom = 23.5
 grow_horizontal = 0
 grow_vertical = 2
-current_tab = 0
+current_tab = 2
 clip_tabs = false
 all_tabs_in_front = true
 
 [node name="cruiser" type="CheckBox" parent="ship_select"]
+visible = false
 layout_mode = 2
-text = "Cruiser"
+text = "Cruiser
+
+Health: 200
+Speed: 400
+Power: 7"
 icon = ExtResource("4_7yvfd")
 metadata/_tab_index = 0
 
 [node name="destroyer" type="CheckBox" parent="ship_select"]
 visible = false
 layout_mode = 2
-text = "Destroyer"
+text = "Destroyer
+
+Health: 400
+Speed: 200
+power: 10"
 icon = ExtResource("5_dfy5j")
 metadata/_tab_index = 1
 
 [node name="corvette" type="CheckBox" parent="ship_select"]
-visible = false
 layout_mode = 2
-text = "Corvette"
+text = "Corvette
+
+Health: 150
+Speed: 600
+Power: 5"
 icon = ExtResource("6_85riq")
 metadata/_tab_index = 2
 
