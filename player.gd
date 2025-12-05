@@ -12,6 +12,7 @@ class_name Player
 var direction := Vector2.ZERO
 var current_state
 
+
 func _ready() -> void:
 	if animation_tree:
 		animation_tree.active = true
@@ -26,9 +27,14 @@ func _unhandled_input(event):
 		_switch_state(new_state)
 
 func _physics_process(delta: float) -> void:
+	var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	if abs(turn_input) > 0.01:
+		rotation_degrees += turn_input * rotation_speed * delta
+	
 	var new_state = current_state.update(delta)
 	if new_state:
 		_switch_state(new_state)
+	
 
 
 func _switch_state(next_state):

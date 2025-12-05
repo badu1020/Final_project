@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bq8hdl3wfm365"]
+[gd_scene load_steps=20 format=3 uid="uid://bq8hdl3wfm365"]
 
 [ext_resource type="Script" uid="uid://bb1kwonrv8i0c" path="res://player.gd" id="1_674bt"]
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://cghu22vi54o5k" path="res://scripts/idle.gd" id="3_insbl"]
 [ext_resource type="Texture2D" uid="uid://dh4vy3hhe86qf" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Engine Effects/PNGs/Nautolan Ship - Battlecruiser - Engine Effect.png" id="3_nsdob"]
 [ext_resource type="Texture2D" uid="uid://0piovwbgirwj" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Designs - Base/PNGs/Nautolan Ship - Battlecruiser - Base.png" id="5_nsdob"]
+[ext_resource type="Script" uid="uid://dyhecylscsor5" path="res://scripts/fire.gd" id="6_uovkd"]
 [ext_resource type="Script" uid="uid://dsr26qrgswwrq" path="res://scripts/move.gd" id="6_yceh7"]
+[ext_resource type="Script" uid="uid://cecl08l5wjb1t" path="res://scripts/death.gd" id="7_jeibo"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nsdob"]
 animation = &"Idle"
@@ -183,10 +185,12 @@ Move = NodePath("Move")
 script = ExtResource("3_insbl")
 
 [node name="Fire" type="Node" parent="StateMachine"]
+script = ExtResource("6_uovkd")
 
 [node name="Damage" type="Node" parent="StateMachine"]
 
 [node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("7_jeibo")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("6_yceh7")

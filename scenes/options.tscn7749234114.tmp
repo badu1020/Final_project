@@ -1,0 +1,134 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl7imhqb4a13e"]
+
+[ext_resource type="Script" uid="uid://cs0jij7kfky7y" path="res://scripts/options.gd" id="1_yjkok"]
+[ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="2_yjkok"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2iy26"]
+texture = ExtResource("2_yjkok")
+modulate_color = Color(0.49019608, 0.49019608, 0.49019608, 1)
+
+[node name="options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yjkok")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2iy26")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -35.0
+offset_right = 331.0
+offset_bottom = 35.0
+grow_vertical = 2
+
+[node name="res" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="REsolution" type="HBoxContainer" parent="VBoxContainer/res"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/res/REsolution"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Resolution"
+
+[node name="resolution" type="OptionButton" parent="VBoxContainer/res/REsolution"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "720p"
+popup/item_0/id = 0
+popup/item_1/text = "1080p"
+popup/item_1/id = 1
+
+[node name="vol" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="volume" type="HBoxContainer" parent="VBoxContainer/vol"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/vol/volume"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Volume"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/vol/volume"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="Control" type="Control" parent="VBoxContainer/vol/volume/MarginContainer"]
+layout_mode = 2
+
+[node name="volume" type="HSlider" parent="VBoxContainer/vol/volume/MarginContainer/Control"]
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 16.0
+value = 25.0
+tick_count = 10
+
+[node name="con" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="control" type="HBoxContainer" parent="VBoxContainer/con"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/con/control"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Resolution"
+
+[node name="controls" type="OptionButton" parent="VBoxContainer/con/control"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "WASD"
+popup/item_0/id = 0
+popup/item_1/text = "Arrows"
+popup/item_1/id = 1
+
+[node name="Timer" type="Timer" parent="VBoxContainer"]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -143.0
+offset_right = 50.0
+offset_bottom = -107.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Back"
+
+[connection signal="item_selected" from="VBoxContainer/res/REsolution/resolution" to="." method="_on_resolution_item_selected"]
+[connection signal="drag_ended" from="VBoxContainer/vol/volume/MarginContainer/Control/volume" to="." method="_on_volume_drag_ended"]
+[connection signal="item_selected" from="VBoxContainer/con/control/controls" to="." method="_on_controls_item_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

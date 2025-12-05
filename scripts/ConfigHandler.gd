@@ -1,27 +1,64 @@
 extends Node
 
-var config = ConfigFile.new()
-const Settings_file_path = "user://settings.ini"
+var config := ConfigFile.new()
+const SETTINGS_FILE := "user://settings.ini"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if !FileAccess.file_exists(Settings_file_path):
-		config.set_value("audio", "volume", 0.25)
-		config.save(Settings_file_path)
-	else:
-		config.load(Settings_file_path)
+func _ready():
+	_load_or_create()
 
 
-func save_audio_settings(key: String, value):
-	config.set_value("audio",key,value)
-	config.save(Settings_file_path)
+# ----------------------------------------------------
+# INTERNAL: Load config or create a new file
+# ----------------------------------------------------
+func _load_or_create():
+	var err = config.load(SETTINGS_FILE)
 
-func load_audio_settings():
-	var audio_settings = {}
-	for key in config.get_section_keys("audio"):
-		audio_settings[key] = config.get_value("audio", key)
-	return audio_settings
+	if err != OK:
+		_create_defaults()
+		config.save(SETTINGS_FILE)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+# ----------------------------------------------------
+# DEFAULT VALUES
+# ----------------------------------------------------
+func _create_defaults():
+	# AUDIO
+	config.set_value("audio", "volume", 0.25)
+
+	# RESOLUTION (stored cleanly as a single key)
+	config.set_value("video", "resolution", "1280x720")
+	config.set_value("video", "fullscreen", false)
+
+
+# ----------------------------------------------------
+# AUDIO SAVE / LOAD
+# ----------------------------------------------------
+func save_audio(volume: float):
+	config.set_value("audio", "volume", clamp(volume, 0.0, 1.0))
+	config.save(SETTINGS_FILE)
+
+func load_audio() -> float:
+	if !config.has_section("audio"):
+		_create_defaults()
+		config.save(SETTINGS_FILE)
+
+	return config.get_value("audio", "volume", 0.25)
+
+
+# ----------------------------------------------------
+# RESOLUTION SAVE / LOAD
+# ----------------------------------------------------
+func save_resolution(res_string: String, fullscreen: bool):
+	config.set_value("video", "resolution", res_string)
+	config.set_value("video", "fullscreen", fullscreen)
+	config.save(SETTINGS_FILE)
+
+func load_resolution() -> Dictionary:
+	if !config.has_section("video"):
+		_create_defaults()
+		config.save(SETTINGS_FILE)
+
+	return {
+		"resolution": config.get_value("video", "resolution", "1280x720"),
+		"fullscreen": config.get_value("video", "fullscreen", false)
+	}

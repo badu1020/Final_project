@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl0gene0x8wj4"]
+
+[ext_resource type="Script" uid="uid://cu1wciat7m760" path="res://scripts/polygon_2d.gd" id="1_e05a3"]
+[ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_wl4x5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e05a3"]
+radius = 2500.0
+
+[node name="arena" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-2539.868, -2632.8228)
+scale = Vector2(3.4302876, 5.2733064)
+color = Color(0.6542321, 0.6542321, 0.654232, 1)
+texture = ExtResource("1_wl4x5")
+invert_border = 96.5
+polygon = PackedVector2Array(15.120605, 2.4316864, 1474.9888, 9.159195, 1495.1714, 977.91986, 15.120605, 991.3748)
+uv = PackedVector2Array(15.120605, 2.4316864, 1474.9888, 9.159195, 1495.1714, 977.91986, 15.120605, 991.3748)
+script = ExtResource("1_e05a3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_e05a3")
