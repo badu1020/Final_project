@@ -32,6 +32,8 @@ func _on_resolution_item_selected(index: int) -> void:
 # Called when volume slider drag ends
 func _on_volume_drag_ended(value_changed: bool) -> void:
 	if value_changed:
+		var volume_db = lerp(-80, 0, slider.value/100)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume_db)
 		ConfigHandler.save_audio(slider.value / 100)
 
 # Example button to return to main menu

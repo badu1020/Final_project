@@ -1,29 +1,34 @@
 extends Control
 
+@onready var ship_size = $ship_select
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	ship_size.current_tab =ConfigHandler.load_ship_size()
 
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
-
+	
 
 func _on_options_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/options.tscn")
-	#var f = FileAccess.open("user://settings.ini", FileAccess.WRITE)
-	#print(f)
-
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
-
 func _on_ship_select_tab_selected(tab: int) -> void:
-	pass # Replace with function body.
+	$ButtonHover.play()
+	ConfigHandler.save_ship_size(tab)
+	
+
+
+func _on_start_mouse_entered() -> void:
+	$ButtonHover.play()
+
+
+func _on_options_mouse_entered() -> void:
+	$ButtonHover.play()
+
+
+func _on_quit_mouse_entered() -> void:
+	$ButtonHover.play()

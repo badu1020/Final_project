@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dam7q2ds37ngh"
+path="res://.godot/imported/button hover.mp3-5931bda278c6fe4d752b50465cad806e.mp3str"
+
+[deps]
+
+source_file="res://assets/Foozle_M0001_Eerie_Space_Music/button hover.mp3"
+dest_files=["res://.godot/imported/button hover.mp3-5931bda278c6fe4d752b50465cad806e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

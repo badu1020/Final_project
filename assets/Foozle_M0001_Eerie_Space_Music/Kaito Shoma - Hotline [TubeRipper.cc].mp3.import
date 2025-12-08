@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://doc8r1c5ovvaf"
+path="res://.godot/imported/Kaito Shoma - Hotline [TubeRipper.cc].mp3-0fa3c4b52d765c9fc69eeeaeceacb3e4.mp3str"
+
+[deps]
+
+source_file="res://assets/Foozle_M0001_Eerie_Space_Music/Kaito Shoma - Hotline [TubeRipper.cc].mp3"
+dest_files=["res://.godot/imported/Kaito Shoma - Hotline [TubeRipper.cc].mp3-0fa3c4b52d765c9fc69eeeaeceacb3e4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

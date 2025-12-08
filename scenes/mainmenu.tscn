@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://sxpqsbattf23"]
+[gd_scene load_steps=14 format=3 uid="uid://sxpqsbattf23"]
 
 [ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_natt5"]
 [ext_resource type="Script" uid="uid://bfrhad0dd04bs" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
 [ext_resource type="FontFile" uid="uid://dlg6nq04rwv0y" path="res://assets/PixelatedEleganceRegular-ovyAA.ttf" id="2_r3g3c"]
-[ext_resource type="Texture2D" uid="uid://dvy632wycep6l" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Battlecruiser - Base.png" id="4_7yvfd"]
+[ext_resource type="AudioStream" uid="uid://dam7q2ds37ngh" path="res://assets/Foozle_M0001_Eerie_Space_Music/button hover.mp3" id="3_uui5l"]
 [ext_resource type="Texture2D" uid="uid://yjjed8k8ed03" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Dreadnought - Base.png" id="5_dfy5j"]
+[ext_resource type="Texture2D" uid="uid://dvy632wycep6l" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Battlecruiser - Base.png" id="6_7yvfd"]
 [ext_resource type="Texture2D" uid="uid://cuc6fel1rpmvw" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Frigate - Base.png" id="6_85riq"]
+[ext_resource type="AudioStream" uid="uid://doc8r1c5ovvaf" path="res://assets/Foozle_M0001_Eerie_Space_Music/Kaito Shoma - Hotline [TubeRipper.cc].mp3" id="7_dfy5j"]
+[ext_resource type="AudioStream" uid="uid://dqfoxs2rekdll" path="res://assets/Foozle_M0001_Eerie_Space_Music/button press.mp3" id="8_85riq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3vvtq"]
 texture = ExtResource("1_natt5")
@@ -26,6 +29,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r3g3c")
 
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uui5l")
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -45,6 +51,11 @@ offset_top = -101.0
 offset_right = 393.0
 offset_bottom = 88.5
 grow_vertical = 2
+
+[node name="Click" type="AudioStreamPlayer2D" parent="VBoxContainer"]
+position = Vector2(-129, -259)
+stream = ExtResource("8_85riq")
+volume_db = 10.0
 
 [node name="start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -123,47 +134,102 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -546.0
 offset_top = -23.5
-offset_right = -186.0
-offset_bottom = 23.5
+offset_right = -91.0
+offset_bottom = 135.5
 grow_horizontal = 0
 grow_vertical = 2
 current_tab = 2
 clip_tabs = false
-all_tabs_in_front = true
 
-[node name="cruiser" type="CheckBox" parent="ship_select"]
+[node name="Corvette" type="TabBar" parent="ship_select"]
 visible = false
 layout_mode = 2
-text = "Cruiser
-
-Health: 200
-Speed: 400
-Power: 7"
-icon = ExtResource("4_7yvfd")
 metadata/_tab_index = 0
 
-[node name="destroyer" type="CheckBox" parent="ship_select"]
+[node name="Sprite2D" type="Sprite2D" parent="ship_select/Corvette"]
+position = Vector2(68, 69.5)
+texture = ExtResource("6_85riq")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ship_select/Corvette"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -319.0
+offset_right = -67.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "A light weight flanker
+
+Health: 	150
+
+Speed : 	500
+
+Power :	4"
+
+[node name="Cruiser" type="TabBar" parent="ship_select"]
 visible = false
 layout_mode = 2
-text = "Destroyer
-
-Health: 400
-Speed: 200
-power: 10"
-icon = ExtResource("5_dfy5j")
 metadata/_tab_index = 1
 
-[node name="corvette" type="CheckBox" parent="ship_select"]
-layout_mode = 2
-text = "Corvette
+[node name="Sprite2D" type="Sprite2D" parent="ship_select/Cruiser"]
+position = Vector2(68, 69.5)
+texture = ExtResource("6_7yvfd")
 
-Health: 150
-Speed: 600
-Power: 5"
-icon = ExtResource("6_85riq")
+[node name="RichTextLabel" type="RichTextLabel" parent="ship_select/Cruiser"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -319.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Good allrounder
+
+Health:	350
+
+Speed: 	375
+
+Power:	7"
+
+[node name="Destroyer" type="TabBar" parent="ship_select"]
+layout_mode = 2
 metadata/_tab_index = 2
 
+[node name="Sprite2D" type="Sprite2D" parent="ship_select/Destroyer"]
+position = Vector2(68, 69.5)
+texture = ExtResource("5_dfy5j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ship_select/Destroyer"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -319.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Heavy destroyer
+
+Health: 	500
+
+Speed:	200
+
+Power:	10"
+
+[node name="hotline_mainmenu_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_dfy5j")
+autoplay = true
+
+[connection signal="mouse_entered" from="VBoxContainer/start" to="." method="_on_start_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]
 [connection signal="tab_selected" from="ship_select" to="." method="_on_ship_select_tab_selected"]
+[connection signal="tab_hovered" from="ship_select/Corvette" to="." method="_on_corvette_tab_hovered"]
+[connection signal="tab_hovered" from="ship_select/Cruiser" to="." method="_on_cruiser_tab_hovered"]
+[connection signal="tab_hovered" from="ship_select/Destroyer" to="." method="_on_destroyer_tab_hovered"]
