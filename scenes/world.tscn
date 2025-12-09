@@ -12,16 +12,18 @@
 [node name="World" type="Node2D"]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 position = Vector2(697.00006, 235)
 scale = Vector2(2840.2498, 1757.7499)
 mesh = SubResource("QuadMesh_rwgxs")
 texture = ExtResource("1_nnsk1")
 metadata/_edit_lock_ = true
 
+[node name="arena" parent="." instance=ExtResource("3_71j4m")]
+
 [node name="Asteroid" parent="." instance=ExtResource("2_rwgxs")]
 position = Vector2(283, 170)
-
-[node name="arena" parent="." instance=ExtResource("3_71j4m")]
+scale = Vector2(5, 5)
 
 [node name="player" parent="." instance=ExtResource("3_4wyf3")]
 

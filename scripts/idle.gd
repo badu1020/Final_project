@@ -2,10 +2,9 @@ extends State
 class_name Idle
 
 func enter(prev_state):
-	character.velocity = Vector2.ZERO
-	# Play idle animation through AnimationTree StateMachine
-	var playback = character.animation_tree.get("parameters/playback")
-	playback.travel("Idle")
+	var engine = character.get_node("engine")
+	engine.play("frig_engine_idle")
+
 
 func handle_input(event):
 	if Input.is_action_pressed("forward") or Input.is_action_pressed("back"):

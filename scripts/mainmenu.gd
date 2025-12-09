@@ -3,6 +3,7 @@ extends Control
 @onready var ship_size = $ship_select
 
 func _ready() -> void:
+	#AudioPlayer.play_music_level()
 	ship_size.current_tab =ConfigHandler.load_ship_size()
 
 

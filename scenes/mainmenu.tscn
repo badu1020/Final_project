@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sxpqsbattf23"]
+[gd_scene load_steps=13 format=3 uid="uid://sxpqsbattf23"]
 
 [ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_natt5"]
 [ext_resource type="Script" uid="uid://bfrhad0dd04bs" path="res://scripts/mainmenu.gd" id="1_r3g3c"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://yjjed8k8ed03" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Dreadnought - Base.png" id="5_dfy5j"]
 [ext_resource type="Texture2D" uid="uid://dvy632wycep6l" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Battlecruiser - Base.png" id="6_7yvfd"]
 [ext_resource type="Texture2D" uid="uid://cuc6fel1rpmvw" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Frigate - Base.png" id="6_85riq"]
-[ext_resource type="AudioStream" uid="uid://doc8r1c5ovvaf" path="res://assets/Foozle_M0001_Eerie_Space_Music/Kaito Shoma - Hotline [TubeRipper.cc].mp3" id="7_dfy5j"]
 [ext_resource type="AudioStream" uid="uid://dqfoxs2rekdll" path="res://assets/Foozle_M0001_Eerie_Space_Music/button press.mp3" id="8_85riq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3vvtq"]
@@ -138,11 +137,10 @@ offset_right = -91.0
 offset_bottom = 135.5
 grow_horizontal = 0
 grow_vertical = 2
-current_tab = 2
+current_tab = 0
 clip_tabs = false
 
 [node name="Corvette" type="TabBar" parent="ship_select"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -195,6 +193,7 @@ Speed: 	375
 Power:	7"
 
 [node name="Destroyer" type="TabBar" parent="ship_select"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -218,10 +217,6 @@ Health: 	500
 Speed:	200
 
 Power:	10"
-
-[node name="hotline_mainmenu_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_dfy5j")
-autoplay = true
 
 [connection signal="mouse_entered" from="VBoxContainer/start" to="." method="_on_start_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]

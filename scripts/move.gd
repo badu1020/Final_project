@@ -3,18 +3,21 @@ class_name Move
 
 var arena_center := Vector2.ZERO
 var arena_radius := 2500
+var idle_timer = 0.1
+var time_in_state = 0.0
 
 func enter(prev_state):
-	var playback = character.animation_tree.get("parameters/playback")
-	if playback:
-		playback.travel("move")
+	pass
 
 func update(delta):
-	# --- Rotation handled in Player.gd (independent) ---
+	time_in_state += delta
+
+	var engine = character.get_node("engine")
+	engine.play("frig_engine_move")
 
 	# --- Forward/back input ---
 	var move_input = Input.get_action_strength("forward") - Input.get_action_strength("back")
-	if abs(move_input) < 0.01:
+	if time_in_state > idle_timer and (move_input) == 0:
 		# Idle check
 		var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 		if abs(turn_input) < 0.01:

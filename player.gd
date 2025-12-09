@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 @export_group("Nodes")
-@export var animation_tree: AnimationTree
 @export var state_machine: Node
 
 @export_group("Movement")
@@ -19,9 +18,6 @@ var current_state
 
 func _ready() -> void:
 	_switch_sprite()
-	print(sprite)
-	if animation_tree:
-		animation_tree.active = true
 
 	# Initialize state machine
 	current_state = state_machine.get_node("Idle")

@@ -5,7 +5,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# AUDIO
+	AudioPlayer.play_music_level()
 	var audio_volume = ConfigHandler.load_audio()
 	slider.value = audio_volume * 100  # slider uses 0-100
 
