@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b4uc78uqifexb"]
+
+[ext_resource type="Script" uid="uid://ccw4mtg766gor" path="res://Items/ItemData.gd" id="1_07puu"]
+[ext_resource type="Texture2D" uid="uid://d10yfyku7j6r8" path="res://Items/item_sprites/laser.png" id="2_7j8yv"]
+
+[resource]
+script = ExtResource("1_07puu")
+name = "Laser"
+disc = "Light weight fast firing laser weapon"
+texture = ExtResource("2_7j8yv")

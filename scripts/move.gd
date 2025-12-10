@@ -1,6 +1,8 @@
 extends State
 class_name Move
 
+@onready var eng = $"../../thrusters"
+
 var arena_center := Vector2.ZERO
 var arena_radius := 2500
 var idle_timer = 0.1
@@ -10,13 +12,11 @@ func enter(prev_state):
 	pass
 
 func update(delta):
+	eng.play("frig_engine_move")
 	time_in_state += delta
-
-	var engine = character.get_node("engine")
-	engine.play("frig_engine_move")
-
 	# --- Forward/back input ---
 	var move_input = Input.get_action_strength("forward") - Input.get_action_strength("back")
+	
 	if time_in_state > idle_timer and (move_input) == 0:
 		# Idle check
 		var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")

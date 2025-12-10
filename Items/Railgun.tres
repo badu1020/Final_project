@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dijoxmv0685l4"]
+
+[ext_resource type="Script" uid="uid://ccw4mtg766gor" path="res://Items/ItemData.gd" id="1_staq8"]
+[ext_resource type="Texture2D" uid="uid://bgw44mcj8of7" path="res://Items/item_sprites/railgun.png" id="2_staq8"]
+
+[resource]
+script = ExtResource("1_staq8")
+name = "Laser"
+disc = "Salvaged railgun from emperial ships"
+texture = ExtResource("2_staq8")

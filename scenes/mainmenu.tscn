@@ -137,10 +137,11 @@ offset_right = -91.0
 offset_bottom = 135.5
 grow_horizontal = 0
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 clip_tabs = false
 
 [node name="Corvette" type="TabBar" parent="ship_select"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -167,7 +168,6 @@ Speed : 	500
 Power :	4"
 
 [node name="Cruiser" type="TabBar" parent="ship_select"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

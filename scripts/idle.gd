@@ -1,9 +1,10 @@
 extends State
 class_name Idle
 
+@onready var eng = $"../../thrusters"
+
 func enter(prev_state):
-	var engine = character.get_node("engine")
-	engine.play("frig_engine_idle")
+	eng.play("frig_engine_idle")
 
 
 func handle_input(event):

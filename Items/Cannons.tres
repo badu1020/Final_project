@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b8m4l1c4gh0qe"]
+
+[ext_resource type="Script" uid="uid://ccw4mtg766gor" path="res://Items/ItemData.gd" id="1_d8ar7"]
+[ext_resource type="Texture2D" uid="uid://c5nnw6vi54cb5" path="res://Items/item_sprites/cannon.png" id="2_5uvmc"]
+
+[resource]
+script = ExtResource("1_d8ar7")
+name = "Cannon"
+disc = "Large caliber plasma cannon"
+texture = ExtResource("2_5uvmc")

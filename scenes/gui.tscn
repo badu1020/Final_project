@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c65egpjfxrb3o"]
+
+[ext_resource type="Script" uid="uid://buwwu3ipvhc06" path="res://scripts/gui.gd" id="1_efmwq"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_efmwq")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -577.0
+offset_top = -308.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="weapons" type="GridContainer" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -355.0
+offset_top = 412.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 2

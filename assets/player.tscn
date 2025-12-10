@@ -1,10 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://bq8hdl3wfm365"]
+[gd_scene load_steps=32 format=3 uid="uid://bq8hdl3wfm365"]
 
 [ext_resource type="Script" uid="uid://bb1kwonrv8i0c" path="res://player.gd" id="1_674bt"]
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
-[ext_resource type="Texture2D" uid="uid://d24petc616sog" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Engine Effects/PNGs/idle engine.png" id="2_mxi64"]
 [ext_resource type="Script" uid="uid://cghu22vi54o5k" path="res://scripts/idle.gd" id="3_insbl"]
-[ext_resource type="Texture2D" uid="uid://dh4vy3hhe86qf" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Engine Effects/PNGs/Nautolan Ship - Battlecruiser - Engine Effect.png" id="3_nsdob"]
 [ext_resource type="Script" uid="uid://dyhecylscsor5" path="res://scripts/fire.gd" id="6_uovkd"]
 [ext_resource type="Script" uid="uid://dsr26qrgswwrq" path="res://scripts/move.gd" id="6_yceh7"]
 [ext_resource type="Script" uid="uid://cecl08l5wjb1t" path="res://scripts/death.gd" id="7_jeibo"]
@@ -34,123 +32,15 @@ resource_name = "Idle"
 length = 0.4
 loop_mode = 1
 step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("engine:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_mxi64")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("engine:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("engine:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
 
 [sub_resource type="Animation" id="Animation_uovkd"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("engine:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("engine:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("engine:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_jeibo"]
 resource_name = "move"
 length = 0.4
 loop_mode = 1
 step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("engine:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_nsdob")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("engine:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("engine:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jeibo"]
 _data = {
@@ -159,77 +49,74 @@ _data = {
 &"move": SubResource("Animation_jeibo")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kviw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yceh7"]
 atlas = ExtResource("9_cn88q")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pt7v0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uovkd"]
 atlas = ExtResource("9_cn88q")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m1hsq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeibo"]
 atlas = ExtResource("9_cn88q")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_irwor"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn88q"]
 atlas = ExtResource("9_cn88q")
 region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cn88q"]
-atlas = ExtResource("9_jeibo")
-region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nknpd"]
 atlas = ExtResource("9_jeibo")
-region = Rect2(64, 0, 64, 64)
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rrun"]
 atlas = ExtResource("9_jeibo")
-region = Rect2(128, 0, 64, 64)
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ah73p"]
 atlas = ExtResource("9_jeibo")
-region = Rect2(192, 0, 64, 64)
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23yx3"]
 atlas = ExtResource("9_jeibo")
-region = Rect2(256, 0, 64, 64)
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lgdun"]
 atlas = ExtResource("9_jeibo")
-region = Rect2(320, 0, 64, 64)
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dclhl"]
 atlas = ExtResource("9_jeibo")
-region = Rect2(384, 0, 64, 64)
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbn5g"]
 atlas = ExtResource("9_jeibo")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kviw"]
+atlas = ExtResource("9_jeibo")
 region = Rect2(448, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6kviw"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_nknpd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6kviw")
+"texture": SubResource("AtlasTexture_yceh7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pt7v0")
+"texture": SubResource("AtlasTexture_uovkd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m1hsq")
+"texture": SubResource("AtlasTexture_jeibo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_irwor")
+"texture": SubResource("AtlasTexture_cn88q")
 }],
 "loop": true,
 "name": &"frig_engine_idle",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cn88q")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nknpd")
 }, {
@@ -250,6 +137,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cbn5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kviw")
 }],
 "loop": true,
 "name": &"frig_engine_move",
@@ -294,9 +184,10 @@ script = ExtResource("6_yceh7")
 
 [node name="main_body" type="Sprite2D" parent="."]
 
-[node name="engine" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_6kviw")
-animation = &"frig_engine_idle"
+[node name="thrusters" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nknpd")
+animation = &"frig_engine_move"
+autoplay = "frig_engine_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -12)
