@@ -8,3 +8,6 @@ script = ExtResource("1_07puu")
 name = "Laser"
 disc = "Light weight fast firing laser weapon"
 texture = ExtResource("2_7j8yv")
+damage = 10
+fire_rate = 100
+power = 1

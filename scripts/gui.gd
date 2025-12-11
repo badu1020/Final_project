@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-var invSize = 6
+
+
+var invSize = 3
 var ItemsLoad = [
 	"res://Items/Cannons.tres",
 	"res://Items/Lasers.tres",

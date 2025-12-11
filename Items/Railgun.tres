@@ -5,6 +5,10 @@
 
 [resource]
 script = ExtResource("1_staq8")
-name = "Laser"
+name = "Railgun"
 disc = "Salvaged railgun from emperial ships"
 texture = ExtResource("2_staq8")
+damage = 200
+fire_rate = 20
+power = 4
+weapon_id = 2
