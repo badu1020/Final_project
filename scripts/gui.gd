@@ -1,7 +1,7 @@
-extends CanvasLayer
+extends Control
 
 
-
+var ship_power = ConfigHandler.load_ship_size()
 var invSize = 3
 var ItemsLoad = [
 	"res://Items/Cannons.tres",
@@ -10,8 +10,18 @@ var ItemsLoad = [
 	
 ]
 
+var ship_size
+var port2
+var starbord2
+var keel
 
 func _ready() -> void:
+	ship_size = ConfigHandler.load_ship_size()
+	port2 = $Port2
+	starbord2 = $Starbord2
+	keel = $Keel
+	
+	_initialize_gui()
 	for i in invSize:
 		var slot = Inventory_slot.new()
 		slot.init(ItemData.Type.STORAGE, Vector2(64,64))
@@ -22,3 +32,55 @@ func _ready() -> void:
 		var item = Inventory_item.new()
 		item.init(load(ItemsLoad[i]))
 		$weapons.get_child(i).add_child(item)
+		
+func _initialize_gui():
+	match ship_size:
+		0:
+			keel.hide()
+			port2.hide()
+			starbord2.hide()
+		1:
+			port2.hide()
+			starbord2.hide()
+		2:
+			pass
+		_:
+			pass
+	
+func refresh():
+	_initialize_gui()
+
+
+func _on_port_child_entered_tree(child: Node) -> void:
+	match child.name:
+		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "port")
+		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "port")
+		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "port")
+
+
+func _on_port_2_child_entered_tree(child: Node) -> void:
+	match child.name:
+		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "port2")
+		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "port2")
+		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "port2")
+
+
+func _on_starbord_child_entered_tree(child: Node) -> void:
+	match child.name:
+		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "starbord")
+		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "starbord")
+		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "starbord")
+
+
+func _on_starbord_2_child_entered_tree(child: Node) -> void:
+	match child.name:
+		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "starbord2")
+		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "starbord2")
+		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "starbord2")
+
+
+func _on_keel_child_entered_tree(child: Node) -> void:
+	match child.name:
+		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "keel")
+		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "keel")
+		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "keel")

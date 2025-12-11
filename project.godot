@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ConfigHandler="*res://scripts/ConfigHandler.gd"
 AudioPlayer="*res://scenes/audio_player.tscn"
+gui="*res://scenes/panel.tscn"
 
 [display]
 

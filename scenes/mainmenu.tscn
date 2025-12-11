@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvy632wycep6l" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Battlecruiser - Base.png" id="6_7yvfd"]
 [ext_resource type="Texture2D" uid="uid://cuc6fel1rpmvw" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Frigate - Base.png" id="6_85riq"]
 [ext_resource type="AudioStream" uid="uid://dqfoxs2rekdll" path="res://assets/Foozle_M0001_Eerie_Space_Music/button press.mp3" id="8_85riq"]
-[ext_resource type="PackedScene" uid="uid://c65egpjfxrb3o" path="res://scenes/gui.tscn" id="9_wf3n4"]
+[ext_resource type="PackedScene" uid="uid://c0xbuwvocdpwm" path="res://scenes/panel.tscn" id="9_wf3n4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3vvtq"]
 texture = ExtResource("1_natt5")
@@ -32,7 +32,7 @@ script = ExtResource("1_r3g3c")
 [node name="ButtonHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_uui5l")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="general" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,11 +139,10 @@ offset_right = -106.0
 offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 clip_tabs = false
 
 [node name="Corvette" type="TabBar" parent="ship_select"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -170,6 +169,7 @@ Speed : 	500
 Power :	4"
 
 [node name="Cruiser" type="TabBar" parent="ship_select"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -220,7 +220,12 @@ Speed:	200
 
 Power:	10"
 
-[node name="GUI" parent="." instance=ExtResource("9_wf3n4")]
+[node name="Panel" parent="." instance=ExtResource("9_wf3n4")]
+layout_mode = 1
+offset_left = 723.0
+offset_top = 404.0
+offset_right = -37.0
+offset_bottom = -28.0
 
 [connection signal="mouse_entered" from="VBoxContainer/start" to="." method="_on_start_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]

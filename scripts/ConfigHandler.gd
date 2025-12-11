@@ -25,6 +25,11 @@ func _create_defaults():
 	config.set_value("video", "resolution", "1280x720")
 	config.set_value("video", "fullscreen", false)
 	config.set_value("ship", "size", 1)
+	config.set_value("waepons","port",0)
+	config.set_value("weapons","port2",0)
+	config.set_value("weapons","starbord",0)
+	config.set_value("weapons","starbord",0)
+	config.set_value("weapons","keel",0)
 
 # ----------------------------------------------------
 # AUDIO
@@ -65,3 +70,15 @@ func save_ship_size(size: int):
 func load_ship_size() -> int:
 	_ensure_loaded()
 	return config.get_value("ship", "size", 1)
+
+func save_weapons(id :int, key: String):
+	_ensure_loaded()
+	print(id, key)
+	config.set_value("waepons", key, id)
+	config.save(SETTINGS_FILE)
+	
+func load_weapons():
+	_ensure_loaded()
+	if config.has_section("weapons"):
+		for key in config.get_section_keys("weapons"):
+			return config.get_value("weapons", key, 0)
