@@ -43,6 +43,6 @@ func make_drag_preview(at_position: Vector2) -> Control:
 	preview.modulate.a = 0.5
 	preview.position = -at_position
 
-	#var wrapper := Control.new()
-	#wrapper.add_child(preview)
-	return preview
+	var wrapper := Control.new()
+	wrapper.add_child(preview)
+	return wrapper

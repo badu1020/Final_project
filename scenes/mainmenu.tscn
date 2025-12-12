@@ -139,11 +139,10 @@ offset_right = -106.0
 offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 2
-current_tab = 2
+current_tab = 0
 clip_tabs = false
 
 [node name="Corvette" type="TabBar" parent="ship_select"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -196,6 +195,7 @@ Speed: 	375
 Power:	7"
 
 [node name="Destroyer" type="TabBar" parent="ship_select"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -233,7 +233,7 @@ offset_bottom = -28.0
 [connection signal="pressed" from="VBoxContainer/options" to="." method="_on_options_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]
-[connection signal="tab_clicked" from="ship_select" to="." method="_on_ship_select_tab_clicked"]
+[connection signal="tab_selected" from="ship_select" to="." method="_on_ship_select_tab_selected"]
 [connection signal="tab_hovered" from="ship_select/Corvette" to="." method="_on_corvette_tab_hovered"]
 [connection signal="tab_hovered" from="ship_select/Cruiser" to="." method="_on_cruiser_tab_hovered"]
 [connection signal="tab_hovered" from="ship_select/Destroyer" to="." method="_on_destroyer_tab_hovered"]
