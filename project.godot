@@ -20,11 +20,13 @@ config/icon="res://icon.svg"
 ConfigHandler="*res://scripts/ConfigHandler.gd"
 AudioPlayer="*res://scenes/audio_player.tscn"
 gui="*res://scenes/panel.tscn"
+Multiplayermanager="*res://scripts/multiplayer/multiplayermanager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/always_on_top=true
 
 [gui]
 
