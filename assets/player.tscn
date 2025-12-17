@@ -200,7 +200,7 @@ animation = &"frig_engine_move"
 autoplay = "frig_engine_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_nsdob")
 
 [node name="Camera2D" type="Camera2D" parent="."]
