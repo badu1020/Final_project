@@ -21,3 +21,11 @@ func stop_music():
 	# Immediately stop playback
 	if playing:
 		stop()
+
+func apply_saved_volume() -> void:
+	var volume = ConfigHandler.load_audio() # 0.0 – 1.0
+	var volume_db = lerp(-80.0, 0.0, volume)
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"),
+		volume_db
+	)

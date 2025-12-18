@@ -5,9 +5,11 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	AudioPlayer.play_music_level()
 	var audio_volume = ConfigHandler.load_audio()
-	slider.value = audio_volume * 100  # slider uses 0-100
+	slider.value = audio_volume * 100  
+	apply_volume(audio_volume)
+	AudioPlayer.play_music_level()
+
 
 	# RESOLUTION
 	var res_settings = ConfigHandler.load_resolution()
@@ -49,3 +51,10 @@ func _on_button_pressed() -> void:
 
 func _on_controls_item_selected(index: int) -> void:
 	pass # Replace with function body.
+
+func apply_volume(normalized: float) -> void:
+	var volume_db = lerp(-80.0, 0.0, clamp(normalized, 0.0, 1.0))
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"),
+	volume_db
+	)

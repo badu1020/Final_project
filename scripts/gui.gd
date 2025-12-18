@@ -3,6 +3,7 @@ extends Control
 
 var ship_power = ConfigHandler.load_ship_size()
 var invSize = 3
+var weapon_id : int
 var ItemsLoad = [
 	"res://Items/Cannons.tres",
 	"res://Items/Lasers.tres",
@@ -50,37 +51,29 @@ func _initialize_gui():
 func refresh():
 	_initialize_gui()
 
+func select_weapon(id : int, key : String):
+	ConfigHandler.save_weapons(id,key)
 
 func _on_port_child_entered_tree(child: Node) -> void:
-	match child.name:
-		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "port")
-		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "port")
-		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "port")
+	weapon_id = child.data.weapon_id
+	select_weapon(weapon_id, "port")
 
 
 func _on_port_2_child_entered_tree(child: Node) -> void:
-	match child.name:
-		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "port2")
-		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "port2")
-		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "port2")
+	weapon_id = child.data.weapon_id
+	select_weapon(weapon_id, "port2")
 
 
 func _on_starbord_child_entered_tree(child: Node) -> void:
-	match child.name:
-		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "starbord")
-		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "starbord")
-		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "starbord")
+	weapon_id = child.data.weapon_id
+	select_weapon(weapon_id, "starbord")
 
 
 func _on_starbord_2_child_entered_tree(child: Node) -> void:
-	match child.name:
-		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "starbord2")
-		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "starbord2")
-		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "starbord2")
+	weapon_id = child.data.weapon_id
+	select_weapon(weapon_id, "starbord2")
 
 
 func _on_keel_child_entered_tree(child: Node) -> void:
-	match child.name:
-		"_TextureRect_17":	ConfigHandler.save_weapons( 0, "keel")
-		"_TextureRect_18":	ConfigHandler.save_weapons( 1, "keel")
-		"_TextureRect_19":	ConfigHandler.save_weapons( 2, "keel")
+	weapon_id = child.data.weapon_id
+	select_weapon(weapon_id, "keel")

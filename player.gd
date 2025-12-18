@@ -15,13 +15,13 @@ class_name Player
 var direction := Vector2.ZERO
 var current_state
 
-
 func _ready() -> void:
 	_switch_sprite()
 
 	# Initialize state machine
 	current_state = state_machine.get_node("Idle")
 	current_state.enter(null)
+	$equipable.load_from_config()
 
 
 func _unhandled_input(event):

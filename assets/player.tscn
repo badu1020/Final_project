@@ -1,12 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://bq8hdl3wfm365"]
+[gd_scene load_steps=25 format=3 uid="uid://bgre84qgjexqr"]
 
 [ext_resource type="Script" uid="uid://bb1kwonrv8i0c" path="res://player.gd" id="1_674bt"]
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
 [ext_resource type="Script" uid="uid://cghu22vi54o5k" path="res://scripts/idle.gd" id="3_insbl"]
-[ext_resource type="Script" uid="uid://dp6fhdkps6ol8" path="res://scripts/damage.gd" id="5_jeibo"]
-[ext_resource type="Script" uid="uid://dyhecylscsor5" path="res://scripts/fire.gd" id="6_uovkd"]
+[ext_resource type="Script" path="res://scripts/damage.gd" id="5_jeibo"]
+[ext_resource type="Script" path="res://scripts/fire.gd" id="6_uovkd"]
 [ext_resource type="Script" uid="uid://dsr26qrgswwrq" path="res://scripts/move.gd" id="6_yceh7"]
 [ext_resource type="Script" uid="uid://cecl08l5wjb1t" path="res://scripts/death.gd" id="7_jeibo"]
+[ext_resource type="Script" uid="uid://bah1ch0sif5lm" path="res://scripts/equipable.gd" id="8_cn88q"]
 [ext_resource type="Texture2D" uid="uid://dbji4qoxbysjg" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/Frig_idle.png" id="9_cn88q"]
 [ext_resource type="Texture2D" uid="uid://cw6r0wx1aebu" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Frigate - Engine.png" id="9_jeibo"]
 
@@ -109,7 +110,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsdob"]
 radius = 19.0
-height = 58.0
+height = 48.0
 
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_674bt")
@@ -137,23 +138,12 @@ script = ExtResource("6_yceh7")
 
 [node name="main_body" type="Sprite2D" parent="."]
 
-[node name="Keel" type="Sprite2D" parent="main_body"]
-
-[node name="Port" type="Sprite2D" parent="main_body"]
-
-[node name="Port2" type="Sprite2D" parent="main_body"]
-
-[node name="Starbord" type="Sprite2D" parent="main_body"]
-
-[node name="Starbord2" type="Sprite2D" parent="main_body"]
-
 [node name="thrusters" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nknpd")
 animation = &"frig_engine_move"
 autoplay = "frig_engine_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_nsdob")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -162,3 +152,21 @@ process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="equipable" type="Node" parent="."]
+script = ExtResource("8_cn88q")
+
+[node name="Keel" type="Sprite2D" parent="equipable"]
+position = Vector2(0, -25)
+
+[node name="Port" type="Sprite2D" parent="equipable"]
+position = Vector2(-12.5, -10)
+
+[node name="Port2" type="Sprite2D" parent="equipable"]
+position = Vector2(-20, 0)
+
+[node name="Starbord" type="Sprite2D" parent="equipable"]
+position = Vector2(12.5, -10)
+
+[node name="Starbord2" type="Sprite2D" parent="equipable"]
+position = Vector2(20, 0)

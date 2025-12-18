@@ -5,6 +5,7 @@ var inventory
 
 
 func _ready() -> void:
+	AudioPlayer.apply_saved_volume()
 	AudioPlayer.play_music_level()
 	ship_size.current_tab =ConfigHandler.load_ship_size()
 	inventory = get_node("/root/gui")
@@ -17,10 +18,6 @@ func _on_options_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
-
-#func _on_ship_select_tab_selected(tab: int) -> void:
-#
-	#
 
 
 func _on_start_mouse_entered() -> void:
@@ -36,6 +33,7 @@ func _on_quit_mouse_entered() -> void:
 
 
 func _on_start_pressed() -> void:
+	AudioPlayer.stop_music()
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 
 

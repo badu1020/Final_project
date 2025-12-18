@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://bisp1cvcg4nmd" path="res://assets/asteroid.tscn" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://bq8hdl3wfm365" path="res://assets/player.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" path="res://assets/player.tscn" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cl0gene0x8wj4" path="res://scenes/arena.tscn" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://3p2713dcw7ov" path="res://scenes/pause_menu.tscn" id="4_k0juu"]
 [ext_resource type="AudioStream" uid="uid://bguuckyuq8wxq" path="res://assets/Foozle_M0001_Eerie_Space_Music/track 1.ogg" id="6_qfnet"]
