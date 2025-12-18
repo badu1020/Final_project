@@ -116,6 +116,29 @@ height = 48.0
 script = ExtResource("1_674bt")
 state_machine = NodePath("StateMachine")
 
+[node name="equipable" type="Node2D" parent="."]
+script = ExtResource("8_cn88q")
+
+[node name="Keel" type="Sprite2D" parent="equipable"]
+z_index = -1
+position = Vector2(0, -25)
+
+[node name="Port" type="Sprite2D" parent="equipable"]
+z_index = -1
+position = Vector2(-12.5, -10)
+
+[node name="Port2" type="Sprite2D" parent="equipable"]
+z_index = -1
+position = Vector2(-20, 0)
+
+[node name="Starbord" type="Sprite2D" parent="equipable"]
+z_index = -1
+position = Vector2(12.5, -10)
+
+[node name="Starbord2" type="Sprite2D" parent="equipable"]
+z_index = -1
+position = Vector2(20, 0)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "Move")]
 script = ExtResource("2_3mip4")
 initial_state = NodePath("Idle")
@@ -152,21 +175,3 @@ process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-
-[node name="equipable" type="Node" parent="."]
-script = ExtResource("8_cn88q")
-
-[node name="Keel" type="Sprite2D" parent="equipable"]
-position = Vector2(0, -25)
-
-[node name="Port" type="Sprite2D" parent="equipable"]
-position = Vector2(-12.5, -10)
-
-[node name="Port2" type="Sprite2D" parent="equipable"]
-position = Vector2(-20, 0)
-
-[node name="Starbord" type="Sprite2D" parent="equipable"]
-position = Vector2(12.5, -10)
-
-[node name="Starbord2" type="Sprite2D" parent="equipable"]
-position = Vector2(20, 0)
