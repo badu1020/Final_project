@@ -3,6 +3,7 @@ class_name StateMachine
 
 @export var initial_state : State
 @export var Move : State
+@export var damage : State
 var current_state : State
 var character : CharacterBody2D
 var state_machine

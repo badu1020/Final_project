@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2lwtug2pc8bi"]
+[gd_scene load_steps=9 format=3 uid="uid://c2lwtug2pc8bi"]
 
 [ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://bisp1cvcg4nmd" path="res://assets/asteroid.tscn" id="2_rwgxs"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://bguuckyuq8wxq" path="res://assets/Foozle_M0001_Eerie_Space_Music/track 1.ogg" id="6_qfnet"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_rwgxs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfnet"]
 
 [node name="World" type="Node2D"]
 
@@ -27,11 +29,19 @@ position = Vector2(283, 170)
 scale = Vector2(5, 5)
 disable_mode = 2
 collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_qfnet")
 
 [node name="player" parent="." instance=ExtResource("3_4wyf3")]
 position = Vector2(4, -1)
 disable_mode = 1
 collision_mask = 2
+
+[node name="Camera2D2" type="Camera2D" parent="player"]
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -41,3 +51,13 @@ collision_mask = 2
 stream = ExtResource("6_qfnet")
 autoplay = true
 parameters/looping = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="health_bar" type="ProgressBar" parent="CanvasLayer2"]
+offset_left = -419.0
+offset_top = -234.0
+offset_right = -161.0
+offset_bottom = -215.0
+step = 1.0
+show_percentage = false
