@@ -10,7 +10,6 @@ class_name Player
 @export var max_health : float = 100.0
 
 @onready var sprite: Sprite2D = $main_body
-@onready var health_bar = $"../CanvasLayer2/health_bar"
 @onready var health_bar = $health_bar
 @onready var corvette = preload("res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Frigate - Base.png")
 @onready var cruiser = preload("res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Battlecruiser - Base.png")
@@ -49,7 +48,6 @@ func _ready() -> void:
 	health = max_health
 	set_health()
 
-
 func _unhandled_input(event):
 	var new_state = current_state.handle_input(event)
 	if new_state:
@@ -76,7 +74,6 @@ func _physics_process(delta: float) -> void:
 	if new_state:
 		_switch_state(new_state)
 	
-
 	# Handle networked movement
 	if is_authority:
 		var move_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -146,8 +143,6 @@ func take_damage(amount: int) -> void:
 		invincible = true
 		invincibility_timer = state_machine.get_node("Damage").invincibility_duration
 		_switch_state(state_machine.get_node("Damage"))
-
-
 
 func _on_hitbox_area_entered(_area: Area2D) -> void:
 	take_damage(25)
