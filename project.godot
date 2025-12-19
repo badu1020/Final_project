@@ -22,6 +22,9 @@ AudioPlayer="*res://scenes/audio_player.tscn"
 gui="*res://scenes/panel.tscn"
 ItemDataBase="*res://scripts/ItemDataBase.gd"
 NetworkHandler="*res://scripts/network_handler.gd"
+ClientNetworkGlobals="*res://scripts/client_network_globals.gd"
+ServerNetworkGlobals="*res://scripts/server_network_globals.gd"
+PlayerSpawner="*res://scripts/player_spawner.gd"
 
 [display]
 

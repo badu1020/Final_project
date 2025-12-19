@@ -9,7 +9,8 @@ signal on_disconnect_from_server()
 signal on_client_packet(data: PackedByteArray)
 
 var available_peer_id: Array = range(255,-1,-1)
-var client_peers: Dictionary[int, ENetPacketPeer]
+var client_peers: Dictionary[int, ENetPacketPeer] = {}  # initialize
+var connected_peer_ids: Array[int] = []
 
 var server_peer : ENetPacketPeer
 
@@ -22,16 +23,25 @@ func _process(delta: float) -> void:
 	handle_events()
 
 func handle_events()-> void:
-	var packet_event: Array = connection.service()
-	var event_type: ENetConnection.EventType = packet_event[0]
-	
-	while event_type != ENetConnection.EVENT_NONE:
+	# Poll and process events until none remain.
+	if connection == null:
+		return
+
+	while true:
+		var packet_event: Array = connection.service()
+		# connection.service() may return null or an empty array when no event available
+		if packet_event == null or packet_event.size() == 0:
+			break
+		var event_type: ENetConnection.EventType = packet_event[0]
+		if event_type == ENetConnection.EVENT_NONE:
+			break
+
 		var peer : ENetPacketPeer = packet_event[1]
+
 		match event_type:
 			ENetConnection.EVENT_ERROR:
 				push_warning("unknown error source: event type")
-				return
-				
+				# continue processing remaining events
 			ENetConnection.EVENT_CONNECT:
 				if is_server:
 					peer_connected(peer)
@@ -42,14 +52,36 @@ func handle_events()-> void:
 					peer_disconnected(peer)
 				else:
 					disconnected_from_server()
-					return
+					# continue, but no more events necessarily
 			ENetConnection.EVENT_RECEIVE:
 				if is_server:
-					on_server_packet.emit(peer.get_meta("id"), peer.get_packet())
+					# ensure meta id exists (GDScript conditional expression)
+					var meta_id = peer.get_meta("id") if peer.has_meta("id") else -1
+					var pkt: PackedByteArray = peer.get_packet()
+					# Log packet info for debugging
+					if pkt != null and pkt.size() > 0:
+						var ptype = pkt.decode_u8(0)
+						print("Server received packet from peer ", meta_id, " type=", ptype, " size=", pkt.size())
+					else:
+						print("Server received empty packet from peer ", meta_id)
+					on_server_packet.emit(meta_id, pkt)
 				else:
-					on_client_packet.emit(peer.get_packet())
-				
+					var pkt: PackedByteArray = peer.get_packet()
+					if pkt != null and pkt.size() > 0:
+						var ptype = pkt.decode_u8(0)
+						print("Client received packet from server type=", ptype, " size=", pkt.size())
+					else:
+						print("Client received empty packet from server")
+					on_client_packet.emit(pkt)
+			_:
+				# unknown event - continue
+				pass
 
+
+func host_game():
+	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	await get_tree().process_frame
+	Start_server()
 
 
 func Start_server(ip_address: String = "127.0.0.1", port: int = 42069):
@@ -67,10 +99,20 @@ func peer_connected(peer: ENetPacketPeer)-> void:
 	var peer_id : int = available_peer_id.pop_back()
 	peer.set_meta("id", peer_id)
 	client_peers[peer_id] = peer
+	connected_peer_ids.append(peer_id)
+	on_peer_connected.emit(peer_id)
+	print("Peer connected: ", peer_id)
+
 func peer_disconnected(peer: ENetPacketPeer)-> void:
 	var peer_id : int = peer.get_meta("id")
 	available_peer_id.push_back(peer_id)
 	client_peers.erase(peer_id)
+
+func _join_game():
+	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	await get_tree().process_frame
+	Start_client()
+
 
 func Start_client(ip_address: String = "127.0.0.1", port: int = 42069):
 	connection = ENetConnection.new()

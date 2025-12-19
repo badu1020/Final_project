@@ -34,7 +34,8 @@ func _on_quit_mouse_entered() -> void:
 
 func _on_start_pressed() -> void:
 	AudioPlayer.stop_music()
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	$Panel.visible = false
+	get_tree().change_scene_to_file("res://scenes/multiplayer_gui.tscn")
 
 
 func _on_ship_select_tab_clicked(tab: int) -> void:
