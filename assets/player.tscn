@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
 [ext_resource type="Script" uid="uid://cghu22vi54o5k" path="res://scripts/idle.gd" id="3_insbl"]
 [ext_resource type="Script" uid="uid://dp6fhdkps6ol8" path="res://scripts/damage.gd" id="5_jeibo"]
-[ext_resource type="Script" path="res://scripts/fire.gd" id="6_uovkd"]
+[ext_resource type="Script" uid="uid://dyhecylscsor5" path="res://scripts/fire.gd" id="6_uovkd"]
 [ext_resource type="Script" uid="uid://dsr26qrgswwrq" path="res://scripts/move.gd" id="6_yceh7"]
 [ext_resource type="Script" uid="uid://cecl08l5wjb1t" path="res://scripts/death.gd" id="7_jeibo"]
 [ext_resource type="Script" uid="uid://bah1ch0sif5lm" path="res://scripts/equipable.gd" id="8_cn88q"]

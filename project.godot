@@ -21,6 +21,7 @@ ConfigHandler="*res://scripts/ConfigHandler.gd"
 AudioPlayer="*res://scenes/audio_player.tscn"
 gui="*res://scenes/panel.tscn"
 ItemDataBase="*res://scripts/ItemDataBase.gd"
+NetworkHandler="*res://scripts/network_handler.gd"
 
 [display]
 
