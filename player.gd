@@ -19,10 +19,8 @@ var direction := Vector2.ZERO
 var current_state
 var health
 var invincible := false
-<<<<<<< HEAD
-var invincibility_timer := 0.0
-=======
 
+var invincibility_timer := 0.0
 var is_authority : bool:
 	get: return !NetworkHandler.is_server && owner_id == ClientNetworkGlobals.id
 
@@ -35,7 +33,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	ServerNetworkGlobals.handle_player_position.disconnect(server_handle_player_position)
 	ClientNetworkGlobals.handle_player_position.disconnect(client_handle_player_position)
->>>>>>> parent of e196c3c (Revert "multiplayer system half works")
+
 
 func _ready() -> void:
 	_switch_sprite()
@@ -58,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 	if abs(turn_input) > 0.01:
 		rotation_degrees += turn_input * rotation_speed * delta
-<<<<<<< HEAD
+
 	
 	# Update invincibility timer
 	if invincible:
@@ -66,10 +64,9 @@ func _physics_process(delta: float) -> void:
 		if invincibility_timer <= 0:
 			invincible = false
 	
-=======
 
 	# Handle state machine
->>>>>>> parent of e196c3c (Revert "multiplayer system half works")
+
 	var new_state = current_state.update(delta)
 	if new_state:
 		_switch_state(new_state)
@@ -127,11 +124,7 @@ func client_handle_player_position(player_position: PlayerPosition):
 func take_damage(amount: int) -> void:
 	if invincible:
 		return
-<<<<<<< HEAD
 
-	print("Taking damage: ", amount)
-=======
->>>>>>> parent of e196c3c (Revert "multiplayer system half works")
 	health -= amount
 	set_health()
 
