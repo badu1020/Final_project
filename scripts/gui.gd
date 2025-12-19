@@ -77,3 +77,7 @@ func _on_starbord_2_child_entered_tree(child: Node) -> void:
 func _on_keel_child_entered_tree(child: Node) -> void:
 	weapon_id = child.data.weapon_id
 	select_weapon(weapon_id, "keel")
+
+
+func _on_tree_exited() -> void:
+	self.visible = false

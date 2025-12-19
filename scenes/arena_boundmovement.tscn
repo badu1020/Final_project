@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7dd0vh4jfwqv"]
+
+[ext_resource type="Script" uid="uid://dplfp5ahuswhh" path="res://scripts/arena_boundmovement.gd" id="1_vwgco"]
+
+[node name="arena_boundmovement" type="Node"]
+script = ExtResource("1_vwgco")

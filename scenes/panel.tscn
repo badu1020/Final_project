@@ -87,6 +87,7 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 4
 columns = 3
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="child_entered_tree" from="Port" to="." method="_on_port_child_entered_tree"]
 [connection signal="child_entered_tree" from="Port2" to="." method="_on_port_2_child_entered_tree"]
 [connection signal="child_entered_tree" from="Starbord" to="." method="_on_starbord_child_entered_tree"]

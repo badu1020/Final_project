@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bisp1cvcg4nmd"]
+[gd_scene load_steps=5 format=3 uid="uid://bisp1cvcg4nmd"]
 
+[ext_resource type="Script" uid="uid://cw6ioi1ldo8oo" path="res://scripts/asteroid.gd" id="1_gdqoc"]
 [ext_resource type="Texture2D" uid="uid://dtmgon41ve40a" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Asteroids/PNGs/Asteroid 01 - Base.png" id="1_v7rdw"]
+[ext_resource type="PackedScene" uid="uid://c7dd0vh4jfwqv" path="res://scenes/arena_boundmovement.tscn" id="3_qdsm7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gdqoc"]
 radius = 19.0
 
-[node name="Asteroid" type="StaticBody2D"]
+[node name="Asteroid" type="Area2D"]
+script = ExtResource("1_gdqoc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -13,3 +16,5 @@ texture = ExtResource("1_v7rdw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gdqoc")
+
+[node name="arena_boundmovement" parent="." instance=ExtResource("3_qdsm7")]

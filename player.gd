@@ -18,6 +18,8 @@ var direction := Vector2.ZERO
 var current_state
 var health
 var invincible := false
+var invincibility_timer := 0.0
+
 func _ready() -> void:
 	_switch_sprite()
 	
@@ -40,6 +42,12 @@ func _physics_process(delta: float) -> void:
 	if abs(turn_input) > 0.01:
 		rotation_degrees += turn_input * rotation_speed * delta
 	
+	# Update invincibility timer
+	if invincible:
+		invincibility_timer -= delta
+		if invincibility_timer <= 0:
+			invincible = false
+	
 	var new_state = current_state.update(delta)
 	if new_state:
 		_switch_state(new_state)
@@ -48,7 +56,7 @@ func _physics_process(delta: float) -> void:
 
 func _switch_state(next_state):
 	current_state.exit()
-	var prev = current_state
+	var prev = current_state.name
 	current_state = next_state
 
 	# IMPORTANT: give the state access to the player and statemachine
@@ -80,13 +88,18 @@ func take_damage(amount: int) -> void:
 	if invincible:
 		return
 
+	print("Taking damage: ", amount)
 	health -= amount
 	set_health()
 
 	if health <= 0:
-		_switch_state("Death")
+		print(health)
+		_switch_state(state_machine.get_node("Death"))
 	else:
-		_switch_state("Damage")
+		print(health)
+		invincible = true
+		invincibility_timer = state_machine.get_node("Damage").invincibility_duration
+		_switch_state(state_machine.get_node("Damage"))
 
 
 
