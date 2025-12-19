@@ -161,8 +161,7 @@ offset_left = -319.0
 offset_right = -67.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "
-A light weight flanker
+text = "A light weight flanker
 
 Health: 	150
 
@@ -188,8 +187,7 @@ anchor_bottom = 1.0
 offset_left = -319.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "
-Good allrounder
+text = "Good allrounder
 
 Health:	350
 
@@ -214,8 +212,7 @@ anchor_bottom = 1.0
 offset_left = -319.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "
-Heavy destroyer
+text = "Heavy destroyer
 
 Health: 	500
 
