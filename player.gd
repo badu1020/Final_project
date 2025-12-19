@@ -8,8 +8,10 @@ class_name Player
 @export var move_speed: float = 350.0
 @export var rotation_speed : float = 250.0
 @export var max_health : float = 100.0
+
 @onready var sprite: Sprite2D = $main_body
 @onready var health_bar = $"../CanvasLayer2/health_bar"
+@onready var health_bar = $health_bar
 @onready var corvette = preload("res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Frigate - Base.png")
 @onready var cruiser = preload("res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Battlecruiser - Base.png")
 @onready var destroyer = preload("res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Designs - Base/PNGs/Nairan - Dreadnought - Base.png")
@@ -18,7 +20,23 @@ var direction := Vector2.ZERO
 var current_state
 var health
 var invincible := false
+<<<<<<< HEAD
 var invincibility_timer := 0.0
+=======
+
+var is_authority : bool:
+	get: return !NetworkHandler.is_server && owner_id == ClientNetworkGlobals.id
+
+var owner_id: int
+
+func _enter_tree() -> void:
+	ServerNetworkGlobals.handle_player_position.connect(server_handle_player_position)
+	ClientNetworkGlobals.handle_player_position.connect(client_handle_player_position)
+
+func _exit_tree() -> void:
+	ServerNetworkGlobals.handle_player_position.disconnect(server_handle_player_position)
+	ClientNetworkGlobals.handle_player_position.disconnect(client_handle_player_position)
+>>>>>>> parent of e196c3c (Revert "multiplayer system half works")
 
 func _ready() -> void:
 	_switch_sprite()
@@ -38,9 +56,11 @@ func _unhandled_input(event):
 		_switch_state(new_state)
 
 func _physics_process(delta: float) -> void:
+	# Handle rotation
 	var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
 	if abs(turn_input) > 0.01:
 		rotation_degrees += turn_input * rotation_speed * delta
+<<<<<<< HEAD
 	
 	# Update invincibility timer
 	if invincible:
@@ -48,18 +68,29 @@ func _physics_process(delta: float) -> void:
 		if invincibility_timer <= 0:
 			invincible = false
 	
+=======
+
+	# Handle state machine
+>>>>>>> parent of e196c3c (Revert "multiplayer system half works")
 	var new_state = current_state.update(delta)
 	if new_state:
 		_switch_state(new_state)
 	
 
+	# Handle networked movement
+	if is_authority:
+		var move_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		velocity = move_input * move_speed
+		move_and_slide()
+		
+		# Send position to server
+		PlayerPosition.create(owner_id, global_position).send(NetworkHandler.server_peer)
 
 func _switch_state(next_state):
 	current_state.exit()
 	var prev = current_state.name
 	current_state = next_state
 
-	# IMPORTANT: give the state access to the player and statemachine
 	current_state.character = self
 	current_state.state_machine = state_machine
 	current_state.enter(prev)
@@ -84,11 +115,26 @@ func _switch_sprite():
 
 func set_health():
 	health_bar.value = health
+
+# Networking callbacks
+func server_handle_player_position(peer_id: int, player_position : PlayerPosition):
+	if owner_id != peer_id: return
+	global_position = player_position.position
+	PlayerPosition.create(owner_id, global_position).broadcast(NetworkHandler.connection)
+
+func client_handle_player_position(player_position: PlayerPosition):
+	if is_authority || owner_id != player_position.id: return
+	global_position = player_position.position
+
+# Health / Damage
 func take_damage(amount: int) -> void:
 	if invincible:
 		return
+<<<<<<< HEAD
 
 	print("Taking damage: ", amount)
+=======
+>>>>>>> parent of e196c3c (Revert "multiplayer system half works")
 	health -= amount
 	set_health()
 
