@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh06x1x44dvhr"
-path="res://.godot/imported/Asteroid - Flame.png-fef55b3645975c571d808ecfc8e79811.ctex"
+uid="uid://bgiu3i2kaqi0o"
+path="res://.godot/imported/Nautolan Ship - Scout.png-18e0eaccc6c643f9f4430a7905de2957.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Effects/PNGs/Asteroid - Flame.png"
-dest_files=["res://.godot/imported/Asteroid - Flame.png-fef55b3645975c571d808ecfc8e79811.ctex"]
+source_file="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Destruction/PNGs/Nautolan Ship - Scout.png"
+dest_files=["res://.godot/imported/Nautolan Ship - Scout.png-18e0eaccc6c643f9f4430a7905de2957.ctex"]
 
 [params]
 

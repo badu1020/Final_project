@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpc2uaw5ujm2c"]
+
+[ext_resource type="Texture2D" uid="uid://b27o7ypa6ueay" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Asteroids/PNGs/Asteroid 01 - Explode.png" id="1_hepev"]
+[ext_resource type="Script" uid="uid://cueg2cjr7hps" path="res://scenes/asteroid_death.gd" id="2_qdblr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdblr"]
+atlas = ExtResource("1_hepev")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_270p3"]
+atlas = ExtResource("1_hepev")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gk7x"]
+atlas = ExtResource("1_hepev")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlb02"]
+atlas = ExtResource("1_hepev")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvv1a"]
+atlas = ExtResource("1_hepev")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pw8b"]
+atlas = ExtResource("1_hepev")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lio7j"]
+atlas = ExtResource("1_hepev")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_poajm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdblr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_270p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gk7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlb02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvv1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pw8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lio7j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="asteroid_death" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_poajm")
+frame_progress = 0.051280808
+script = ExtResource("2_qdblr")

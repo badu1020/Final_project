@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bupuyry1jf4ax"]
+
+[ext_resource type="Texture2D" uid="uid://dtmgon41ve40a" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Asteroids/PNGs/Asteroid 01 - Base.png" id="1_pvb22"]
+[ext_resource type="Texture2D" uid="uid://b27o7ypa6ueay" path="res://assets/Foozle_2DS0015_Void_EnvironmentPack/Asteroids/PNGs/Asteroid 01 - Explode.png" id="2_qbujg"]
+
+[node name="Asteroid01Base" type="Sprite2D"]
+position = Vector2(116, 341)
+texture = ExtResource("1_pvb22")
+
+[node name="Asteroid01Explode" type="Sprite2D" parent="."]
+position = Vector2(326, -25)
+rotation = -0.00042840466
+texture = ExtResource("2_qbujg")

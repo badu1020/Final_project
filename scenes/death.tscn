@@ -1,0 +1,144 @@
+[gd_scene load_steps=22 format=3 uid="uid://03pxqvv7sntt"]
+
+[ext_resource type="Texture2D" uid="uid://ny1160h87dff" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Destruction/PNGs/Nairan - Battlecruiser  -  Destruction.png" id="1_0hhgj"]
+[ext_resource type="Script" uid="uid://162pwp43vj41" path="res://scenes/death.gd" id="2_w8wr1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8wr1"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjai8"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1r8t"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6up1m"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0no0"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7205l"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m3wi"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l7jp"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shhaa"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npx8y"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qttbc"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a60g8"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48ncm"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1v4q"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1664, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vgaw"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1792, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkd47"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(1920, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vp2w"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qn5sr"]
+atlas = ExtResource("1_0hhgj")
+region = Rect2(2176, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_isuj8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8wr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjai8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1r8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6up1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0no0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7205l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m3wi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l7jp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shhaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npx8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qttbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a60g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48ncm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1v4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vgaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkd47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vp2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qn5sr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="death" type="AnimatedSprite2D"]
+rotation = -0.0051808357
+sprite_frames = SubResource("SpriteFrames_isuj8")
+frame_progress = 0.46340665
+script = ExtResource("2_w8wr1")
