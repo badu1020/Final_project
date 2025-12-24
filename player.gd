@@ -19,6 +19,8 @@ var direction := Vector2.ZERO
 var current_state
 var health
 var invincible := false
+var arena_center := Vector2.ZERO
+var arena_radius := 2500.0
 
 var invincibility_timer := 0.0
 var is_authority : bool:
@@ -53,10 +55,20 @@ func _unhandled_input(event):
 
 func _physics_process(delta: float) -> void:
 	# Handle rotation
-	var turn_input = Input.get_action_strength("turn_right") - Input.get_action_strength("turn_left")
+	var turn_input = Input.get_action_strength("turn_right") \
+			- Input.get_action_strength("turn_left")
+			# forward
+	var move_input = Input.get_action_strength("forward") \
+			- Input.get_action_strength("back")
 	if abs(turn_input) > 0.01:
 		rotation_degrees += turn_input * rotation_speed * delta
+ 			#Move in facing direction
+	if abs(move_input) > 0.01:
+		velocity = transform.y * move_input * - move_speed
+	else:
+		velocity = Vector2.ZERO
 
+	move_and_slide()
 	
 	# Update invincibility timer
 	if invincible:
@@ -64,7 +76,6 @@ func _physics_process(delta: float) -> void:
 		if invincibility_timer <= 0:
 			invincible = false
 	
-
 	# Handle state machine
 
 	var new_state = current_state.update(delta)
@@ -73,12 +84,29 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle networked movement
 	if is_authority:
-		var move_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-		velocity = move_input * move_speed
-		move_and_slide()
-		
-		# Send position to server
-		PlayerPosition.create(owner_id, global_position).send(NetworkHandler.server_peer)
+		move_input = Input.get_action_strength("forward") \
+			- Input.get_action_strength("back")
+
+		# --- Turn ---
+		turn_input = Input.get_action_strength("turn_right") \
+			- Input.get_action_strength("turn_left")
+		# --- Movement ---
+		var direction = Vector2.UP.rotated(deg_to_rad(rotation_degrees))
+		var desired_move = direction * move_input * move_speed * delta
+		var new_pos = global_position + desired_move
+
+		# --- Clamp to circular arena ---
+		var offset = new_pos - arena_center
+		if offset.length() > arena_radius:
+			new_pos = arena_center + offset.normalized() * arena_radius
+
+		global_position = new_pos
+
+		# --- Network sync ---
+		PlayerPosition.create(owner_id, global_position) \
+			.send(NetworkHandler.server_peer)
+		NetworkHandler.connection.flush()
+
 
 func _switch_state(next_state):
 	current_state.exit()
@@ -114,7 +142,10 @@ func set_health():
 func server_handle_player_position(peer_id: int, player_position : PlayerPosition):
 	if owner_id != peer_id: return
 	global_position = player_position.position
-	PlayerPosition.create(owner_id, global_position).broadcast(NetworkHandler.connection)
+	if NetworkHandler.is_server:
+		PlayerPosition.create(owner_id, global_position) \
+		.broadcast(NetworkHandler.connection)
+
 
 func client_handle_player_position(player_position: PlayerPosition):
 	if is_authority || owner_id != player_position.id: return

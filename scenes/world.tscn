@@ -1,85 +1,17 @@
-<<<<<<< HEAD
-[gd_scene load_steps=8 format=3 uid="uid://c2lwtug2pc8bi"]
+[gd_scene load_steps=4 format=3 uid="uid://c2lwtug2pc8bi"]
 
-[ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://bgre84qgjexqr" path="res://assets/player.tscn" id="3_4wyf3"]
-=======
-[gd_scene load_steps=11 format=3 uid="uid://c2lwtug2pc8bi"]
-
-[ext_resource type="Texture2D" uid="uid://delgfbn6hu7cu" path="res://assets/background.jpg" id="1_nnsk1"]
-[ext_resource type="PackedScene" uid="uid://bisp1cvcg4nmd" path="res://assets/asteroid.tscn" id="2_rwgxs"]
->>>>>>> parent of e196c3c (Revert "multiplayer system half works")
 [ext_resource type="PackedScene" uid="uid://cl0gene0x8wj4" path="res://scenes/arena.tscn" id="3_71j4m"]
-[ext_resource type="PackedScene" uid="uid://3p2713dcw7ov" path="res://scenes/pause_menu.tscn" id="4_k0juu"]
 [ext_resource type="PackedScene" uid="uid://b5bhlaw0enlrk" path="res://scenes/asteroidspawner.tscn" id="6_i7141"]
-[ext_resource type="AudioStream" uid="uid://bguuckyuq8wxq" path="res://assets/Foozle_M0001_Eerie_Space_Music/track 1.ogg" id="6_qfnet"]
-[ext_resource type="PackedScene" uid="uid://caxlejbvikcyw" path="res://scenes/player_spawner.tscn" id="7_i7141"]
-[ext_resource type="Script" uid="uid://vl4vjtxrpfn8" path="res://scripts/server_network_globals.gd" id="8_server"]
-[ext_resource type="Script" uid="uid://cmusaijyervlc" path="res://scripts/client_network_globals.gd" id="9_client"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_rwgxs"]
 
 [node name="World" type="Node2D"]
 
-[node name="ServerNetworkGlobals" type="Node" parent="."]
-script = ExtResource("8_server")
+[node name="player" parent="." instance=ExtResource("3_4wyf3")]
 
-[node name="ClientNetworkGlobals" type="Node" parent="."]
-script = ExtResource("9_client")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-visible = false
-position = Vector2(697.00006, 235)
-scale = Vector2(2840.2498, 1757.7499)
-mesh = SubResource("QuadMesh_rwgxs")
-texture = ExtResource("1_nnsk1")
-metadata/_edit_lock_ = true
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(0.5, 0.5)
 
 [node name="arena" parent="." instance=ExtResource("3_71j4m")]
-z_index = -999
-
-<<<<<<< HEAD
-[node name="player" parent="." instance=ExtResource("3_4wyf3")]
-position = Vector2(4, -1)
-disable_mode = 1
-collision_mask = 2
-
-[node name="Camera2D2" type="Camera2D" parent="player"]
-zoom = Vector2(0.5, 0.5)
-process_callback = 0
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-=======
-[node name="Asteroid" parent="." instance=ExtResource("2_rwgxs")]
-position = Vector2(283, 170)
-scale = Vector2(5, 5)
-disable_mode = 2
-collision_layer = 2
-physics_material_override = SubResource("PhysicsMaterial_qfnet")
->>>>>>> parent of e196c3c (Revert "multiplayer system half works")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="pause_menu" parent="CanvasLayer" instance=ExtResource("4_k0juu")]
-
-[node name="Track1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_qfnet")
-autoplay = true
-parameters/looping = false
-
-<<<<<<< HEAD
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="health_bar" type="ProgressBar" parent="CanvasLayer2"]
-offset_left = -419.0
-offset_top = -234.0
-offset_right = -161.0
-offset_bottom = -215.0
-step = 1.0
-show_percentage = false
+z_index = -99
 
 [node name="asteroidspawner" parent="." instance=ExtResource("6_i7141")]
-=======
-[node name="Player_spawner" parent="." instance=ExtResource("7_i7141")]
->>>>>>> parent of e196c3c (Revert "multiplayer system half works")

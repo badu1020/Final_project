@@ -3,6 +3,8 @@ extends PacketInfo
 
 var id: int
 var remoted_ids: Array[int]
+static var MIN_SIZE := 1 + 4  # type + int
+
 
 static func create(id: int, remote_ids: Array[int]) -> IdAssignment:
 	var info := IdAssignment.new()

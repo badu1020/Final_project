@@ -54,28 +54,23 @@ func handle_events()-> void:
 					disconnected_from_server()
 					# continue, but no more events necessarily
 			ENetConnection.EVENT_RECEIVE:
-				if is_server:
-					# ensure meta id exists (GDScript conditional expression)
-					var meta_id = peer.get_meta("id") if peer.has_meta("id") else -1
-					var pkt: PackedByteArray = peer.get_packet()
-					# Log packet info for debugging
-					if pkt != null and pkt.size() > 0:
-						var ptype = pkt.decode_u8(0)
-						print("Server received packet from peer ", meta_id, " type=", ptype, " size=", pkt.size())
+				# Retrieve packet once and branch by role
+				var pkt: PackedByteArray = peer.get_packet()
+				if pkt != null and pkt.size() > 0:
+					var buffer := StreamPeerBuffer.new()
+					buffer.data_array = pkt
+					buffer.seek(0)
+					
+					var data = buffer.get_var()
+					
+					if typeof(data) == TYPE_DICTIONARY and data.get("type") == "assign_id":
+						ClientNetworkGlobals.id = data.id
+						print("Client assigned ID:", ClientNetworkGlobals.id)
 					else:
-						print("Server received empty packet from peer ", meta_id)
-					on_server_packet.emit(meta_id, pkt)
-				else:
-					var pkt: PackedByteArray = peer.get_packet()
-					if pkt != null and pkt.size() > 0:
-						var ptype = pkt.decode_u8(0)
-						print("Client received packet from server type=", ptype, " size=", pkt.size())
-					else:
-						print("Client received empty packet from server")
-					on_client_packet.emit(pkt)
-			_:
-				# unknown event - continue
-				pass
+						on_client_packet.emit(pkt)
+
+
+
 
 
 func host_game():
@@ -95,18 +90,27 @@ func Start_server(ip_address: String = "127.0.0.1", port: int = 42069):
 	is_server = true
 	
 
-func peer_connected(peer: ENetPacketPeer)-> void:
-	var peer_id : int = available_peer_id.pop_back()
+func peer_connected(peer: ENetPacketPeer) -> void:
+	var peer_id: int = available_peer_id.pop_back()
 	peer.set_meta("id", peer_id)
+
 	client_peers[peer_id] = peer
 	connected_peer_ids.append(peer_id)
+
+	# ID assignment is handled by ServerNetworkGlobals via IdAssignment.broadcast()
+	# (avoid sending a separate put_var packet here because other code
+	# expects binary PacketInfo formats and will fail decoding raw var data)
+
 	on_peer_connected.emit(peer_id)
-	print("Peer connected: ", peer_id)
+	print("Peer connected:", peer_id)
+
+
 
 func peer_disconnected(peer: ENetPacketPeer)-> void:
 	var peer_id : int = peer.get_meta("id")
 	available_peer_id.push_back(peer_id)
 	client_peers.erase(peer_id)
+	on_peer_disconnected.emit(peer_id)
 
 func _join_game():
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
@@ -116,7 +120,7 @@ func _join_game():
 
 func Start_client(ip_address: String = "127.0.0.1", port: int = 42069):
 	connection = ENetConnection.new()
-	var error : Error= connection.create_host(1)
+	var error : Error= connection.create_host()
 	if error:
 		print("client startting failed")
 		connection = null

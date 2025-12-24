@@ -29,9 +29,16 @@ func on_peer_connected(peer_id:int )-> void:
 func on_peer_disconnected(peer_id: int)-> void:
 	peer_ids.erase(peer_id)
 
-func on_server_packet(peer_id: int, data: PackedByteArray)-> void:
+func on_server_packet(peer_id: int, data: PackedByteArray) -> void:
+	if data == null or data.size() < 1:
+		return
+
 	var packet_type: int = data.decode_u8(0)
+
 	match packet_type:
 		PacketInfo.PACKET_TYPE.PLAYER_POSITION:
+			if data.size() < PlayerPosition.MIN_SIZE:
+				return
 			handle_player_position.emit(peer_id, PlayerPosition.create_from_data(data))
-		_: pass
+		_:
+			pass
