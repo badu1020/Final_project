@@ -62,6 +62,7 @@ func handle_events() -> void:
 						on_client_packet.emit(pkt)
 
 func host_game():
+	cleanup()
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 	await get_tree().process_frame
 	Start_server()
@@ -105,6 +106,7 @@ func peer_disconnected(peer: ENetPacketPeer) -> void:
 	print("Peer disconnected:", peer_id)
 
 func _join_game():
+	cleanup()
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 	await get_tree().process_frame
 	Start_client()
@@ -139,3 +141,16 @@ func disconnected_from_server() -> void:
 	print("Disconnected from server")
 	on_disconnect_from_server.emit()
 	connection = null
+
+func cleanup():
+	"""Properly cleanup network connection"""
+	if connection:
+		connection.destroy()
+		connection = null
+	
+	server_peer = null
+	client_peers.clear()
+	connected_peer_ids.clear()
+	is_server = false
+	
+	print("Network cleaned up")

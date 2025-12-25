@@ -7,8 +7,18 @@ func _ready() -> void:
 	AudioPlayer.apply_saved_volume()
 	AudioPlayer.play_music_level()
 	ship_size.current_tab = ConfigHandler.load_ship_size()
+	reset_camera()
 	# inventory is already assigned via @onready
 	
+func reset_camera():
+	# Find and remove any world cameras that might still exist
+	for node in get_tree().get_nodes_in_group("world_camera"):
+		node.queue_free()
+	
+	# Reset viewport camera to default
+	var viewport = get_viewport()
+	if viewport:
+		viewport.canvas_transform = Transform2D() 
 func _on_options_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/options.tscn")
 

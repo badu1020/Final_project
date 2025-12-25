@@ -27,6 +27,8 @@ var is_authority : bool:
 	get: return owner_id == ClientNetworkGlobals.id
 
 var owner_id: int
+var is_paused: bool = false
+const PAUSE_MENU = preload("res://scenes/pause_menu.tscn")
 
 func _enter_tree() -> void:
 	ServerNetworkGlobals.handle_player_position.connect(server_handle_player_position)
@@ -40,6 +42,8 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	_switch_sprite()
 	
+	if is_authority:
+		add_to_group("local_player")
 	# Initialize state machine
 	current_state = state_machine.get_node("Idle")
 	current_state.enter(null)
@@ -55,11 +59,33 @@ func _ready() -> void:
 			print("Camera enabled for player:", owner_id)
 
 func _unhandled_input(event):
-	var new_state = current_state.handle_input(event)
-	if new_state:
-		_switch_state(new_state)
+	# Only local player can pause
+	if !is_authority:
+		return
+	
+	# Check for pause input
+	if event.is_action_pressed("pause") && !is_paused:
+		pause_game()
+		get_viewport().set_input_as_handled()
+		return
+	
+	# Continue with state machine input
+	if !is_paused:
+		var new_state = current_state.handle_input(event)
+		if new_state:
+			_switch_state(new_state)
+
+func pause_game():
+	is_paused = true
+	invincible = true  # Make invincible while paused
+	var pause_menu = PAUSE_MENU.instantiate()
+	get_tree().current_scene.add_child(pause_menu)
 
 func _physics_process(delta: float) -> void:
+	# Don't process physics if paused
+	if is_paused:
+		return
+	
 	# Only process input for the authority player (local player)
 	if is_authority:
 		# Handle rotation
@@ -88,28 +114,24 @@ func _physics_process(delta: float) -> void:
 		
 		# Send position update
 		if NetworkHandler.is_server:
-			# Host: broadcast to all clients
 			PlayerPosition.create(owner_id, global_position, rotation_degrees) \
 				.broadcast(NetworkHandler.connection)
 		else:
-			# Client: send to server
 			if NetworkHandler.server_peer != null:
 				PlayerPosition.create(owner_id, global_position, rotation_degrees) \
 					.send(NetworkHandler.server_peer)
 	
 	# Update invincibility timer (runs for all players)
-	if invincible:
+	if invincible && !is_paused:  # Don't count down while paused
 		invincibility_timer -= delta
 		if invincibility_timer <= 0:
 			invincible = false
 	
 	# Handle state machine (runs for all players)
-	var new_state = current_state.update(delta)
-	if new_state:
-		_switch_state(new_state)
-		
-	#if Input.get_action_strength("pause"):
-		#get_tree().change_scene_to_file("res://scenes/pause_menu.tscn")
+	if !is_paused:
+		var new_state = current_state.update(delta)
+		if new_state:
+			_switch_state(new_state)
 
 # Networking callbacks
 func server_handle_player_position(peer_id: int, player_position: PlayerPosition):
@@ -169,6 +191,22 @@ func _switch_sprite():
 
 func set_health():
 	health_bar.value = health
+	update_health_bar_color()
+
+func update_health_bar_color():
+	var health_percent = health / max_health
+	
+	# Smooth gradient from green -> yellow -> red
+	var bar_color: Color
+	
+	if health_percent > 0.6:
+		bar_color = Color.GREEN.lerp(Color.YELLOW, (1.0 - health_percent) / 0.4)
+	elif health_percent > 0.3:
+		bar_color = Color.YELLOW.lerp(Color.ORANGE, (0.6 - health_percent) / 0.3)
+	else:
+		bar_color = Color.ORANGE.lerp(Color.RED, (0.3 - health_percent) / 0.3)
+	
+	health_bar.modulate = bar_color
 
 # Find these functions in your player.gd (around line 80-90 based on your earlier code)
 # and replace them with this:
