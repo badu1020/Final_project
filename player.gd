@@ -107,6 +107,9 @@ func _physics_process(delta: float) -> void:
 	var new_state = current_state.update(delta)
 	if new_state:
 		_switch_state(new_state)
+		
+	#if Input.get_action_strength("pause"):
+		#get_tree().change_scene_to_file("res://scenes/pause_menu.tscn")
 
 # Networking callbacks
 func server_handle_player_position(peer_id: int, player_position: PlayerPosition):

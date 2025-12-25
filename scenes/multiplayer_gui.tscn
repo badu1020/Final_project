@@ -50,5 +50,22 @@ text = "HOst server"
 layout_mode = 2
 text = "Connect to server"
 
+[node name="back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -112.0
+offset_right = 46.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
