@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bgre84qgjexqr"]
+[gd_scene load_steps=45 format=3 uid="uid://bgre84qgjexqr"]
 
 [ext_resource type="Script" uid="uid://bb1kwonrv8i0c" path="res://player.gd" id="1_674bt"]
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dbji4qoxbysjg" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/Frig_idle.png" id="9_cn88q"]
 [ext_resource type="Texture2D" uid="uid://cw6r0wx1aebu" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Frigate - Engine.png" id="9_jeibo"]
 [ext_resource type="Texture2D" uid="uid://c4pbbbc4kh2r0" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Dreadnought - Engine.png" id="10_ah73p"]
+[ext_resource type="PackedScene" uid="uid://d0g1cwpshm2j3" path="res://scenes/death_screen.tscn" id="13_ah73p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsdob"]
 radius = 19.0
@@ -322,5 +323,12 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Death_screen" parent="." instance=ExtResource("13_ah73p")]
+visible = false
+offset_left = -84.0
+offset_top = -59.0
+offset_right = -44.0
+offset_bottom = -19.0
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,6 +1,7 @@
 extends State
 class_name Death
 
+@export var death_screen: Control
 @export var death_delay: float = 1.5
 var timer := 0.0
 func enter(_prev_state: String) -> void:
