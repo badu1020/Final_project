@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://r5q4vy3h22qn"]
+[gd_scene load_steps=10 format=3 uid="uid://r5q4vy3h22qn"]
 
+[ext_resource type="Script" uid="uid://cl72dc0dgo7uw" path="res://railgun_ammo.gd" id="1_52bge"]
 [ext_resource type="Texture2D" uid="uid://btoblgvwma75n" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Weapon Effects - Projectiles/PNGs/Nairan - Bolt.png" id="1_qr2kb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52bge"]
@@ -52,6 +53,7 @@ animations = [{
 [node name="railgun_ammo" type="Area2D"]
 collision_layer = 0
 collision_mask = 3
+script = ExtResource("1_52bge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_52bge")

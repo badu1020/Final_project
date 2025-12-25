@@ -10,6 +10,11 @@ extends Node2D
 func _ready():
 	# Set the laser's max reach
 	ray_cast.target_position = Vector2(max_range, 0)
+	
+	# Initialize Line2D with 2 points (start and end)
+	line_2d.points = [Vector2.ZERO, Vector2(max_range, 0)]
+	# Set the laser's max reach
+	ray_cast.target_position = Vector2(max_range, 0)
 
 func _physics_process(delta: float) -> void:
 	if ray_cast.is_colliding():

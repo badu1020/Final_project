@@ -333,4 +333,7 @@ offset_top = -59.0
 offset_right = -44.0
 offset_bottom = -19.0
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -25)
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
