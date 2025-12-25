@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dbji4qoxbysjg" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/Frig_idle.png" id="9_cn88q"]
 [ext_resource type="Texture2D" uid="uid://cw6r0wx1aebu" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Frigate - Engine.png" id="9_jeibo"]
 [ext_resource type="Texture2D" uid="uid://c4pbbbc4kh2r0" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Dreadnought - Engine.png" id="10_ah73p"]
-[ext_resource type="PackedScene" uid="uid://d0g1cwpshm2j3" path="res://scenes/death_screen.tscn" id="13_ah73p"]
+[ext_resource type="PackedScene" path="res://scenes/death_screen.tscn" id="13_ah73p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsdob"]
 radius = 19.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://03pxqvv7sntt"]
+[gd_scene load_steps=22 format=3 uid="uid://b3tkqy4mon6ji"]
 
 [ext_resource type="Texture2D" uid="uid://ny1160h87dff" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Destruction/PNGs/Nairan - Battlecruiser  -  Destruction.png" id="1_nbfv8"]
 [ext_resource type="Script" uid="uid://162pwp43vj41" path="res://scenes/death_cruiser.gd" id="2_tsr2q"]
