@@ -324,6 +324,7 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
 [node name="Death_screen" parent="." instance=ExtResource("13_ah73p")]
 visible = false

@@ -41,9 +41,9 @@ func on_client_packet(data: PackedByteArray):
 			handle_player_position.emit(PlayerPosition.create_from_data(data))
 		
 		PacketInfo.PACKET_TYPE.ASTEROID_SPAWN:
-			print("Received ASTEROID_SPAWN packet")  # ADD THIS
+			# print("Received ASTEROID_SPAWN packet")  # ADD THIS
 			var spawn_info := AsteroidSpawn.create_from_data(data)
-			print("Asteroid decoded: id=", spawn_info.asteroid_id, " pos=", spawn_info.position)  # ADD THIS
+			# print("Asteroid decoded: id=", spawn_info.asteroid_id, " pos=", spawn_info.position)  # ADD THIS
 			handle_asteroid_spawn.emit(spawn_info)
 		PacketInfo.PACKET_TYPE.ASTEROID_POSITION:
 			var pos_info : AsteroidPosition = AsteroidPosition.create_from_data(data)
@@ -52,12 +52,12 @@ func on_client_packet(data: PackedByteArray):
 			print("Unknown packet type:", packet_type)  # ADD
 
 func manage_ids(id_assignment: IdAssignment) -> void:
-	print("manage_ids called. Current id:", id, " Assignment id:", id_assignment.id)
+	# print("manage_ids called. Current id:", id, " Assignment id:", id_assignment.id)
 	
 	if id == -1:
 		# First time receiving ID - this is OUR id
 		id = id_assignment.id
-		print("Local ID assigned:", id)
+		# print("Local ID assigned:", id)
 		handle_local_id_assignment.emit(id)
 		
 		# Emit remote IDs (excluding self)
@@ -82,5 +82,5 @@ func manage_ids(id_assignment: IdAssignment) -> void:
 		
 		# New remote player!
 		remote_ids.append(new_player_id)
-		print("New remote player joined:", new_player_id)
+		# print("New remote player joined:", new_player_id)
 		handle_remote_id_assignment.emit(new_player_id)

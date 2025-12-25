@@ -90,15 +90,15 @@ func spawn_asteroid(position: Vector2) -> void:
 		AsteroidSpawn.create(next_asteroid_id, position, random_direction, random_scale) \
 			.broadcast(NetworkHandler.connection)
 		NetworkHandler.connection.flush()
-		print("Server spawned and broadcast asteroid ", next_asteroid_id)
+		# print("Server spawned and broadcast asteroid ", next_asteroid_id)
 	
 	next_asteroid_id += 1
 
 func spawn_asteroid_from_network(spawn_info: AsteroidSpawn) -> void:
-	print("Client spawning asteroid from network: id=", spawn_info.asteroid_id)
+	# print("Client spawning asteroid from network: id=", spawn_info.asteroid_id)
 	
 	if get_tree().current_scene.has_node("asteroid_" + str(spawn_info.asteroid_id)):
-		print("Asteroid ", spawn_info.asteroid_id, " already exists, skipping")
+		# print("Asteroid ", spawn_info.asteroid_id, " already exists, skipping")
 		return
 	
 	if !asteroid_scene:
