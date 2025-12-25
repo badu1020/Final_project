@@ -10,4 +10,5 @@ enum Type {WEAPONS, STORAGE}
 @export var damage : int
 @export var fire_rate : int
 @export var power : int
+@export var range : int
 @export var weapon_id : int

@@ -8,7 +8,7 @@ func _ready() -> void:
 	AudioPlayer.apply_saved_volume()
 	AudioPlayer.play_music_level()
 	ship_size.current_tab =ConfigHandler.load_ship_size()
-	inventory = get_node("/root/gui")
+	inventory = get_node("/root/Panel")
 	
 
 
@@ -34,7 +34,6 @@ func _on_quit_mouse_entered() -> void:
 
 func _on_start_pressed() -> void:
 	AudioPlayer.stop_music()
-	$Panel.visible = false
 	get_tree().change_scene_to_file("res://scenes/multiplayer_gui.tscn")
 
 

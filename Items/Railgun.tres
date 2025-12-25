@@ -11,4 +11,5 @@ texture = ExtResource("2_staq8")
 damage = 200
 fire_rate = 20
 power = 4
+range = 1000
 weapon_id = 2

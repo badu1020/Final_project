@@ -7,12 +7,24 @@ var arena_center := Vector2.ZERO
 var arena_radius := 2500.0
 var idle_timer := 0.1
 var time_in_state := 0.0
+var animation
+
+func _ready() -> void:
+	match ConfigHandler.load_ship_size():
+		0:
+			animation = "frig_engine_move"
+		1:
+			animation = "cuiser_engine_move"
+		2:
+			animation = "destroyer_engine_move"
+		_:
+			animation = "frig_engine_move"
 
 func enter(_prev_state):
 	time_in_state = 0.0
 
 func update(delta):
-	eng.play("frig_engine_move")
+	eng.play(animation)
 	time_in_state += delta
 
 	# ✅ Declare inputs FIRST so they exist in full scope

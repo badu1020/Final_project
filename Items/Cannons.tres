@@ -11,4 +11,5 @@ texture = ExtResource("2_5uvmc")
 damage = 50
 fire_rate = 50
 power = 3
+range = 500
 weapon_id = 1

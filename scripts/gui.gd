@@ -17,6 +17,8 @@ var starbord2
 var keel
 
 func _ready() -> void:
+	get_tree().node_added.connect(_on_scene_changed)
+	_check_current_scene()
 	ship_size = ConfigHandler.load_ship_size()
 	port2 = $Port2
 	starbord2 = $Starbord2
@@ -34,6 +36,15 @@ func _ready() -> void:
 		item.init(load(ItemsLoad[i]))
 		$weapons.get_child(i).add_child(item)
 		
+func _on_scene_changed(node):
+	if node == get_tree().current_scene:
+		_check_current_scene()
+func _check_current_scene():
+	var current_scene = get_tree().current_scene
+	if current_scene:
+		# Only visible in main menu
+		visible = (current_scene.name == "Mainmenu")
+		print("Panel visibility: ", visible, " in scene: ", current_scene.name)
 func _initialize_gui():
 	match ship_size:
 		0:

@@ -11,3 +11,4 @@ texture = ExtResource("2_7j8yv")
 damage = 10
 fire_rate = 100
 power = 1
+range = 600
