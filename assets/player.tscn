@@ -301,8 +301,9 @@ script = ExtResource("6_uovkd")
 [node name="Damage" type="Node" parent="StateMachine"]
 script = ExtResource("5_jeibo")
 
-[node name="Death" type="Node" parent="StateMachine"]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("death_screen")]
 script = ExtResource("7_jeibo")
+death_screen = NodePath("../../Death_screen")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("6_yceh7")
