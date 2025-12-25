@@ -24,7 +24,7 @@ var arena_radius := 2500.0
 
 var invincibility_timer := 0.0
 var is_authority : bool:
-	get: return !NetworkHandler.is_server && owner_id == ClientNetworkGlobals.id
+	get: return owner_id == ClientNetworkGlobals.id
 
 var owner_id: int
 
@@ -47,6 +47,12 @@ func _ready() -> void:
 	health_bar.max_value = max_health
 	health = max_health
 	set_health()
+	
+	# Enable camera only for local player
+	if has_node("Camera2D"):
+		$Camera2D.enabled = is_authority
+		if is_authority:
+			print("Camera enabled for player:", owner_id)
 
 func _unhandled_input(event):
 	var new_state = current_state.handle_input(event)
@@ -54,58 +60,82 @@ func _unhandled_input(event):
 		_switch_state(new_state)
 
 func _physics_process(delta: float) -> void:
-	# Handle rotation
-	var turn_input = Input.get_action_strength("turn_right") \
-			- Input.get_action_strength("turn_left")
-			# forward
-	var move_input = Input.get_action_strength("forward") \
-			- Input.get_action_strength("back")
-	if abs(turn_input) > 0.01:
-		rotation_degrees += turn_input * rotation_speed * delta
- 			#Move in facing direction
-	if abs(move_input) > 0.01:
-		velocity = transform.y * move_input * - move_speed
-	else:
-		velocity = Vector2.ZERO
+	# Only process input for the authority player (local player)
+	if is_authority:
+		# Handle rotation
+		var turn_input = Input.get_action_strength("turn_right") \
+				- Input.get_action_strength("turn_left")
+		
+		# Forward/back
+		var move_input = Input.get_action_strength("forward") \
+				- Input.get_action_strength("back")
+		
+		if abs(turn_input) > 0.01:
+			rotation_degrees += turn_input * rotation_speed * delta
+		
+		# Move in facing direction
+		if abs(move_input) > 0.01:
+			velocity = transform.y * move_input * -move_speed
+		else:
+			velocity = Vector2.ZERO
 
-	move_and_slide()
+		move_and_slide()
+		
+		# Clamp to arena
+		var offset = global_position - arena_center
+		if offset.length() > arena_radius:
+			global_position = arena_center + offset.normalized() * arena_radius
+		
+		# Send position update
+		if NetworkHandler.is_server:
+			# Host: broadcast to all clients
+			PlayerPosition.create(owner_id, global_position) \
+				.broadcast(NetworkHandler.connection)
+		else:
+			# Client: send to server
+			if NetworkHandler.server_peer != null:
+				PlayerPosition.create(owner_id, global_position) \
+					.send(NetworkHandler.server_peer)
 	
-	# Update invincibility timer
+	# Update invincibility timer (runs for all players)
 	if invincible:
 		invincibility_timer -= delta
 		if invincibility_timer <= 0:
 			invincible = false
 	
-	# Handle state machine
-
+	# Handle state machine (runs for all players)
 	var new_state = current_state.update(delta)
 	if new_state:
 		_switch_state(new_state)
+
+# Networking callbacks
+func server_handle_player_position(peer_id: int, player_position: PlayerPosition):
+	# Only update if this packet is for THIS player instance
+	if owner_id != peer_id: 
+		return
 	
-	# Handle networked movement
-	if is_authority:
-		move_input = Input.get_action_strength("forward") \
-			- Input.get_action_strength("back")
-
-		# --- Turn ---
-		turn_input = Input.get_action_strength("turn_right") \
-			- Input.get_action_strength("turn_left")
-		# --- Movement ---
-		var direction = Vector2.UP.rotated(deg_to_rad(rotation_degrees))
-		var desired_move = direction * move_input * move_speed * delta
-		var new_pos = global_position + desired_move
-
-		# --- Clamp to circular arena ---
-		var offset = new_pos - arena_center
-		if offset.length() > arena_radius:
-			new_pos = arena_center + offset.normalized() * arena_radius
-
-		global_position = new_pos
-
-		# --- Network sync ---
+	# Clamp position to arena
+	var offset = player_position.position - arena_center
+	if offset.length() > arena_radius:
+		player_position.position = arena_center + offset.normalized() * arena_radius
+	
+	global_position = player_position.position
+	
+	# Server broadcasts to ALL clients (including the sender, so they see themselves on other screens)
+	if NetworkHandler.is_server:
 		PlayerPosition.create(owner_id, global_position) \
-			.send(NetworkHandler.server_peer)
-		NetworkHandler.connection.flush()
+			.broadcast(NetworkHandler.connection)
+
+func client_handle_player_position(player_position: PlayerPosition):
+	# Don't update our own player (we control it directly)
+	if is_authority: 
+		return
+	
+	# Only update if this packet is for THIS player instance
+	if owner_id != player_position.id: 
+		return
+	
+	global_position = player_position.position
 
 
 func _switch_state(next_state):
@@ -138,19 +168,8 @@ func _switch_sprite():
 func set_health():
 	health_bar.value = health
 
-# Networking callbacks
-func server_handle_player_position(peer_id: int, player_position : PlayerPosition):
-	if owner_id != peer_id: return
-	global_position = player_position.position
-	if NetworkHandler.is_server:
-		PlayerPosition.create(owner_id, global_position) \
-		.broadcast(NetworkHandler.connection)
-
-
-func client_handle_player_position(player_position: PlayerPosition):
-	if is_authority || owner_id != player_position.id: return
-	global_position = player_position.position
-
+# Find these functions in your player.gd (around line 80-90 based on your earlier code)
+# and replace them with this:
 # Health / Damage
 func take_damage(amount: int) -> void:
 	if invincible:
