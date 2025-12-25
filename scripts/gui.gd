@@ -1,6 +1,5 @@
 extends Control
 
-var ship_power = ConfigHandler.load_ship_size()
 var invSize = 3
 var weapon_id : int
 
@@ -11,9 +10,6 @@ var ItemsLoad = [
 ]
 
 var ship_size
-var port2
-var starbord2
-var keel
 var power_usage: int = 0
 
 # TEMP loadout (saved only on Save)
@@ -27,22 +23,25 @@ var pending_weapons := {
 
 @onready var text_screen = $RichTextLabel2
 
+# -------------------------------------------------
+# READY
+# -------------------------------------------------
+
 func _ready() -> void:
+	# 🔴 REQUIRED:
+	# Set THIS NODE (root Control) Pause → Mode = Process in Inspector
+	print("Weapon GUI ready")
+
 	ship_size = ConfigHandler.load_ship_size()
-
-	port2 = $Port2
-	starbord2 = $Starbord2
-	keel = $Keel
-
 	_initialize_gui()
 
-	# Create inventory slots
+	# Create inventory slots (never cleared)
 	for i in invSize:
 		var slot = Inventory_slot.new()
 		slot.init(ItemData.Type.STORAGE, Vector2(64, 64))
 		$weapons.add_child(slot)
 
-	# Load items into inventory
+	# Load inventory items (never cleared)
 	for i in ItemsLoad.size():
 		var item = Inventory_item.new()
 		item.init(load(ItemsLoad[i]))
@@ -52,23 +51,20 @@ func _ready() -> void:
 # GUI
 # -------------------------------------------------
 
-func _initialize_gui():
+func _initialize_gui() -> void:
 	match ship_size:
 		0:
-			keel.hide()
-			port2.hide()
-			starbord2.hide()
+			$Keel.hide()
+			$Port2.hide()
+			$Starbord2.hide()
 		1:
-			port2.hide()
-			starbord2.hide()
+			$Port2.hide()
+			$Starbord2.hide()
 		2:
 			pass
 
-func refresh():
-	_initialize_gui()
-
 # -------------------------------------------------
-# SLOT HANDLERS (NO SAVING HERE)
+# SLOT HANDLERS (NO SAVING)
 # -------------------------------------------------
 
 func _on_port_child_entered_tree(child: Node) -> void:
@@ -87,6 +83,9 @@ func _on_keel_child_entered_tree(child: Node) -> void:
 	_assign_weapon(child, "keel")
 
 func _assign_weapon(child: Node, slot_key: String) -> void:
+	if child == null:
+		return
+
 	weapon_id = child.data.weapon_id
 	pending_weapons[slot_key] = weapon_id
 	total_power(child.data.power)
@@ -112,7 +111,7 @@ func total_power(power: int) -> void:
 		text_screen.hide()
 
 # -------------------------------------------------
-# CLEAR
+# CLEAR (ONLY SHIP SLOTS)
 # -------------------------------------------------
 
 func _clear_slot(slot: Node) -> void:
@@ -120,21 +119,14 @@ func _clear_slot(slot: Node) -> void:
 		if child is Inventory_item:
 			child.queue_free()
 
-func _clear_inventory() -> void:
-	for slot in $weapons.get_children():
-		for child in slot.get_children():
-			if child is Inventory_item:
-				child.queue_free()
-
 func _on_clear_pressed() -> void:
-	print("clear")
+	print("clear pressed")
+
 	_clear_slot($Port)
 	_clear_slot($Port2)
 	_clear_slot($Starbord)
 	_clear_slot($Starbord2)
 	_clear_slot($Keel)
-
-	_clear_inventory()
 
 	power_usage = 0
 	get_tree().paused = false
@@ -148,7 +140,8 @@ func _on_clear_pressed() -> void:
 # -------------------------------------------------
 
 func _on_save_pressed() -> void:
-	print("save")
+	print("save pressed")
+
 	for slot in pending_weapons.keys():
 		ConfigHandler.save_weapons(pending_weapons[slot], slot)
 
