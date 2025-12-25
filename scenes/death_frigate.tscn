@@ -1,0 +1,128 @@
+[gd_scene load_steps=19 format=3 uid="uid://bsj0ojnhf57t0"]
+
+[ext_resource type="Texture2D" uid="uid://cbqwobo05rnci" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Destruction/PNGs/Nairan - Frigate -  Destruction.png" id="1_g0f7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qrrv"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2hkx"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vlmi"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paias"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08wwd"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0v07"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmhqy"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0ehd"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k173s"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8588"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y48ay"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shiyk"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45pqn"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp3k3"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lj2ej"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4ho4"]
+atlas = ExtResource("1_g0f7o")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2jbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qrrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2hkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vlmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paias")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08wwd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0v07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmhqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0ehd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k173s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8588")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y48ay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shiyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45pqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp3k3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lj2ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4ho4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
+
+[node name="death_frigate" type="AnimatedSprite2D"]
+position = Vector2(632, 379)
+sprite_frames = SubResource("SpriteFrames_n2jbg")
+frame_progress = 0.060265884

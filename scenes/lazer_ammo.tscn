@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://b4udlp03d7x0b"]
+
+[ext_resource type="Script" uid="uid://dbna0sjw5wxj2" path="res://lazer_ammo.gd" id="1_n0qs6"]
+[ext_resource type="Texture2D" uid="uid://buujb8eqghywd" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Weapon Effects - Projectiles/PNGs/Nautolan - Ray.png" id="2_lxfpy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yqe5"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(0, 0, 18, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjgo4"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(18, 0, 18, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8crto"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(36, 0, 18, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slmhn"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(54, 0, 18, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_632vq"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(0, 0, 18, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buck8"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(18, 0, 18, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_watme"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yqe5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjgo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8crto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slmhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_632vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buck8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf73g"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(36, 0, 18, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0nhh"]
+atlas = ExtResource("2_lxfpy")
+region = Rect2(54, 0, 18, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mnwcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf73g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0nhh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="lazer_ammo" type="Node2D"]
+script = ExtResource("1_n0qs6")
+
+[node name="Line2D" type="Line2D" parent="."]
+modulate = Color(0, 0.6313726, 0.63529414, 1)
+default_color = Color(0, 0.63328165, 0.6339888, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="ImpactSprite2" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0, 0.6313726, 0.63529414, 1)
+light_mask = 3
+sprite_frames = SubResource("SpriteFrames_watme")
+
+[node name="MuzzleSprite2" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mnwcm")

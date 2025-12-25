@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbihfl6vbvqt0"]
+
+[ext_resource type="Texture2D" uid="uid://ddgeiqmk1quq6" path="res://assets/Foozle_2DS0014_Void_EnemyFleet_3/Nautolan/Weapon Effects - Projectiles/PNGs/Nautolan - Spinning Bullet.png" id="1_vdvwu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dm0y"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64nx7"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pc7u"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoyc3"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nydyx"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1dd8"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hctuq"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(48, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdvs6"]
+atlas = ExtResource("1_vdvwu")
+region = Rect2(56, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyaqr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dm0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64nx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pc7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoyc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nydyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1dd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hctuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdvs6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6w7k"]
+radius = 5.0990195
+
+[node name="cannon_ammo" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gyaqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i6w7k")

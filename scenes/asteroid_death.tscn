@@ -60,7 +60,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="asteroid_death" type="AnimatedSprite2D"]
+[node name="death_asteroid" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_poajm")
 frame_progress = 0.051280808
 script = ExtResource("2_qdblr")
