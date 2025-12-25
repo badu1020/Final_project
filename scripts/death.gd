@@ -20,11 +20,11 @@ func enter(_prev_state: String) -> void:
 		owner.invincible = true
 		owner.velocity = Vector2.ZERO
 	
-	# Turn off collision so player becomes a "ghost"
+	# Turn off collision so player becomes a "ghost" (use deferred to avoid physics errors)
 	if owner.has_node("CollisionShape2D"):
-		owner.get_node("CollisionShape2D").disabled = true
+		owner.get_node("CollisionShape2D").set_deferred("disabled", true)
 	
-	# Darken the ship sprite (FIXED: uses "main_body" instead of "Sprite2D")
+	# Darken the ship sprite
 	if owner.has_node("main_body"):
 		owner.get_node("main_body").modulate = Color(0.3, 0.3, 0.3)
 	
@@ -44,12 +44,12 @@ func update(delta: float) -> void:
 	# When timer reaches 0, show the death screen
 	if timer <= 0:
 		_on_death_finished()
-	# Stay in death state (don't transition)
+
 # ===== RUNS WHEN LEAVING DEATH STATE (when respawning) =====
 func exit() -> void:
-	# Re-enable collision
+	# Re-enable collision (use deferred to avoid physics errors)
 	if owner.has_node("CollisionShape2D"):
-		owner.get_node("CollisionShape2D").disabled = false
+		owner.get_node("CollisionShape2D").set_deferred("disabled", false)
 	
 	# Reset sprite color back to normal
 	if owner.has_node("main_body"):
@@ -65,20 +65,35 @@ func _on_death_finished() -> void:
 		death_screen.visible = true
 		print("Death screen shown!")
 		
-		# Connect the buttons
-		var respawn_btn = death_screen.get_node_or_null("RespawnButton")
-		var leave_btn = death_screen.get_node_or_null("LeaveButton")
-		
-		if respawn_btn and not respawn_btn.pressed.is_connected(_on_respawn_pressed):
-			respawn_btn.pressed.connect(_on_respawn_pressed)
-		
-		if leave_btn and not leave_btn.pressed.is_connected(_on_leave_pressed):
-			leave_btn.pressed.connect(_on_leave_pressed)
+		# Find buttons inside VBoxContainer
+		var vbox = death_screen.get_node_or_null("VBoxContainer")
+		if vbox:
+			# Connect Respawn button
+			var respawn_btn = vbox.get_node_or_null("RespawnButton")
+			if respawn_btn and not respawn_btn.pressed.is_connected(_on_respawn_pressed):
+				respawn_btn.pressed.connect(_on_respawn_pressed)
+				print("Respawn button connected!")
+			
+			# Connect Leave button
+			var leave_btn = vbox.get_node_or_null("LeaveButton")
+			if leave_btn and not leave_btn.pressed.is_connected(_on_leave_pressed):
+				leave_btn.pressed.connect(_on_leave_pressed)
+				print("Leave button connected!")
+		else:
+			print("ERROR: VBoxContainer not found!")
 	else:
 		print("ERROR: No death_screen assigned!")
 
-# Respawn button pressed
+# ===== BUTTON FUNCTIONS =====
+
+# Called when Respawn button is pressed
 func _on_respawn_pressed() -> void:
+	print("Respawn button pressed!")
+	
+	# Hide death screen immediately
+	if death_screen:
+		death_screen.visible = false
+	
 	# Reset health to full
 	owner.health = owner.max_health
 	owner.set_health()
@@ -86,26 +101,36 @@ func _on_respawn_pressed() -> void:
 	# Reset invincibility
 	owner.invincible = false
 	
-	# Move player to center of arena
+	# Move player back to arena center
 	owner.global_position = owner.arena_center
 	owner.rotation_degrees = 0
 	
-	# Go back to Idle state
+	# Switch back to Idle state
 	owner._switch_state(state_machine.get_node("Idle"))
 
-# Leave button pressed
+# Called when Leave button is pressed
 func _on_leave_pressed() -> void:
-	# Option 1: Return to main menu (change path to your menu scene)
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	print("Leave button pressed!")
+	
+	# Disconnect from multiplayer
+	if NetworkHandler.is_server:
+		# If host, shut down the server
+		NetworkHandler.connection = null
+		NetworkHandler.is_server = false
+		print("Server shut down")
+	else:
+		# If client, disconnect from server
+		NetworkHandler.disconnect_client()
+		print("Disconnected from server")
+	
+	# Clear player references
+	NetworkHandler.connected_peer_ids.clear()
+	NetworkHandler.client_peers.clear()
+	ClientNetworkGlobals.id = -1
+	
+	# Go back to main menu or quit
+	# Option 1: Main menu (update the path!)
+	# get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 	
 	# Option 2: Just quit the game
-	# get_tree().quit()
-	if death_screen:
-		death_screen.visible = true
-		get_tree().change_scene_to_file("res://scenes/death_screen.tscn")
-		print("Death screen shown!")
-	else:
-		print("ERROR: No death_screen assigned in Death state inspector!")
-	
-	# The buttons will be connected in your DeathScreen script
-	# or you can connect them here if needed
+	get_tree().quit()
