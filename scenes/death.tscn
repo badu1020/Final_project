@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://biew2jaer7uub"]
 
 [ext_resource type="Texture2D" uid="uid://ny1160h87dff" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Destruction/PNGs/Nairan - Battlecruiser  -  Destruction.png" id="1_0hhgj"]
-[ext_resource type="Script" path="res://scenes/death.gd" id="2_w8wr1"]
+[ext_resource type="Script" uid="uid://cueg2cjr7hps" path="res://scenes/asteroid_death.gd" id="2_w8wr1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8wr1"]
 atlas = ExtResource("1_0hhgj")
