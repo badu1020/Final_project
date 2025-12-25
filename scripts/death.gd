@@ -61,7 +61,45 @@ func exit() -> void:
 
 # ===== SHOWS THE DEATH SCREEN =====
 func _on_death_finished() -> void:
-	# Show the death panel
+	if death_screen:
+		death_screen.visible = true
+		print("Death screen shown!")
+		
+		# Connect the buttons
+		var respawn_btn = death_screen.get_node_or_null("RespawnButton")
+		var leave_btn = death_screen.get_node_or_null("LeaveButton")
+		
+		if respawn_btn and not respawn_btn.pressed.is_connected(_on_respawn_pressed):
+			respawn_btn.pressed.connect(_on_respawn_pressed)
+		
+		if leave_btn and not leave_btn.pressed.is_connected(_on_leave_pressed):
+			leave_btn.pressed.connect(_on_leave_pressed)
+	else:
+		print("ERROR: No death_screen assigned!")
+
+# Respawn button pressed
+func _on_respawn_pressed() -> void:
+	# Reset health to full
+	owner.health = owner.max_health
+	owner.set_health()
+	
+	# Reset invincibility
+	owner.invincible = false
+	
+	# Move player to center of arena
+	owner.global_position = owner.arena_center
+	owner.rotation_degrees = 0
+	
+	# Go back to Idle state
+	owner._switch_state(state_machine.get_node("Idle"))
+
+# Leave button pressed
+func _on_leave_pressed() -> void:
+	# Option 1: Return to main menu (change path to your menu scene)
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	
+	# Option 2: Just quit the game
+	# get_tree().quit()
 	if death_screen:
 		death_screen.visible = true
 		get_tree().change_scene_to_file("res://scenes/death_screen.tscn")
