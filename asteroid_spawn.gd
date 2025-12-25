@@ -1,3 +1,4 @@
+# Update AsteroidSpawn to include a seed
 class_name AsteroidSpawn
 extends PacketInfo
 
@@ -5,6 +6,7 @@ var asteroid_id: int
 var position: Vector2
 var direction: Vector2
 var scale_value: float
+var seed_value: int  # NEW
 
 static func create(asteroid_id: int, pos: Vector2, dir: Vector2, scale_val: float) -> AsteroidSpawn:
 	var info := AsteroidSpawn.new()
@@ -23,7 +25,7 @@ static func create_from_data(data: PackedByteArray) -> AsteroidSpawn:
 
 func encode() -> PackedByteArray:
 	var data: PackedByteArray = super.encode()
-	data.resize(1 + 4 + 4 + 4 + 4 + 4 + 4)  # type + id + pos.x + pos.y + dir.x + dir.y + scale
+	data.resize(1 + 4 + 4 + 4 + 4 + 4 + 4 )  # Added 4 bytes for seed
 	data.encode_u32(1, asteroid_id)
 	data.encode_float(5, position.x)
 	data.encode_float(9, position.y)

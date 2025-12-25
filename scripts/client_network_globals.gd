@@ -4,6 +4,7 @@ signal handle_local_id_assignment(local_id: int)
 signal handle_remote_id_assignment(remote_id: int)
 signal handle_player_position(player_position: PlayerPosition)
 signal handle_asteroid_spawn(spawn_info: AsteroidSpawn)
+signal handle_asteroid_position(pos_info: AsteroidPosition)
 
 var id: int = -1
 var remote_ids: Array[int] = []
@@ -40,9 +41,13 @@ func on_client_packet(data: PackedByteArray):
 			handle_player_position.emit(PlayerPosition.create_from_data(data))
 		
 		PacketInfo.PACKET_TYPE.ASTEROID_SPAWN:
+			print("Received ASTEROID_SPAWN packet")  # ADD THIS
 			var spawn_info := AsteroidSpawn.create_from_data(data)
+			print("Asteroid decoded: id=", spawn_info.asteroid_id, " pos=", spawn_info.position)  # ADD THIS
 			handle_asteroid_spawn.emit(spawn_info)
-		
+		PacketInfo.PACKET_TYPE.ASTEROID_POSITION:
+			var pos_info : AsteroidPosition = AsteroidPosition.create_from_data(data)
+			handle_asteroid_position.emit(pos_info)
 		_:
 			print("Unknown packet type:", packet_type)  # ADD
 

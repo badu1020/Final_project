@@ -3,7 +3,8 @@ class_name PacketInfo
 enum PACKET_TYPE{
 	ID_ASSIGNMENT = 0,
 	PLAYER_POSITION = 10,
-	ASTEROID_SPAWN = 20
+	ASTEROID_SPAWN = 20,
+	ASTEROID_POSITION = 21  # NEW
 }
 
 var packet_type :PACKET_TYPE

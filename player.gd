@@ -89,12 +89,12 @@ func _physics_process(delta: float) -> void:
 		# Send position update
 		if NetworkHandler.is_server:
 			# Host: broadcast to all clients
-			PlayerPosition.create(owner_id, global_position) \
+			PlayerPosition.create(owner_id, global_position, rotation_degrees) \
 				.broadcast(NetworkHandler.connection)
 		else:
 			# Client: send to server
 			if NetworkHandler.server_peer != null:
-				PlayerPosition.create(owner_id, global_position) \
+				PlayerPosition.create(owner_id, global_position, rotation_degrees) \
 					.send(NetworkHandler.server_peer)
 	
 	# Update invincibility timer (runs for all players)
@@ -110,7 +110,6 @@ func _physics_process(delta: float) -> void:
 
 # Networking callbacks
 func server_handle_player_position(peer_id: int, player_position: PlayerPosition):
-	# Only update if this packet is for THIS player instance
 	if owner_id != peer_id: 
 		return
 	
@@ -120,22 +119,22 @@ func server_handle_player_position(peer_id: int, player_position: PlayerPosition
 		player_position.position = arena_center + offset.normalized() * arena_radius
 	
 	global_position = player_position.position
+	rotation_degrees = player_position.rotation_deg  # ADD THIS
 	
-	# Server broadcasts to ALL clients (including the sender, so they see themselves on other screens)
+	# Server broadcasts to ALL clients
 	if NetworkHandler.is_server:
-		PlayerPosition.create(owner_id, global_position) \
+		PlayerPosition.create(owner_id, global_position, rotation_degrees) \
 			.broadcast(NetworkHandler.connection)
 
 func client_handle_player_position(player_position: PlayerPosition):
-	# Don't update our own player (we control it directly)
 	if is_authority: 
 		return
 	
-	# Only update if this packet is for THIS player instance
 	if owner_id != player_position.id: 
 		return
 	
 	global_position = player_position.position
+	rotation_degrees = player_position.rotation_deg  # ADD THIS
 
 
 func _switch_state(next_state):
