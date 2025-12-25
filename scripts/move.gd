@@ -14,7 +14,7 @@ func _ready() -> void:
 		0:
 			animation = "frig_engine_move"
 		1:
-			animation = "cuiser_engine_move"
+			animation = "cruiser_engine_move"
 		2:
 			animation = "destroyer_engine_move"
 		_:

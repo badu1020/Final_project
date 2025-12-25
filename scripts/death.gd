@@ -64,6 +64,7 @@ func _on_death_finished() -> void:
 	# Show the death panel
 	if death_screen:
 		death_screen.visible = true
+		get_tree().change_scene_to_file("res://scenes/death_screen.tscn")
 		print("Death screen shown!")
 	else:
 		print("ERROR: No death_screen assigned in Death state inspector!")
