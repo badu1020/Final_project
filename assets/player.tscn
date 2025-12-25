@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bgre84qgjexqr"]
+[gd_scene load_steps=46 format=3 uid="uid://bgre84qgjexqr"]
 
 [ext_resource type="Script" uid="uid://bb1kwonrv8i0c" path="res://player.gd" id="1_674bt"]
 [ext_resource type="Script" uid="uid://pymftw27mh2y" path="res://assets/state_machine.gd" id="2_3mip4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cecl08l5wjb1t" path="res://scripts/death.gd" id="7_jeibo"]
 [ext_resource type="Script" uid="uid://bah1ch0sif5lm" path="res://scripts/equipable.gd" id="8_cn88q"]
 [ext_resource type="Texture2D" uid="uid://dtwl4fisw3tjy" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Battlecruiser - Engine.png" id="9_7rrun"]
+[ext_resource type="Script" uid="uid://darf50jptgqvd" path="res://assets/avto_fire.gd" id="9_23yx3"]
 [ext_resource type="Texture2D" uid="uid://dbji4qoxbysjg" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/Frig_idle.png" id="9_cn88q"]
 [ext_resource type="Texture2D" uid="uid://cw6r0wx1aebu" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Frigate - Engine.png" id="9_jeibo"]
 [ext_resource type="Texture2D" uid="uid://c4pbbbc4kh2r0" path="res://assets/Foozle_2DS0013_Void_EnemyFleet_2/Nairan/Engine Effects/PNGs/Nairan - Dreadnought - Engine.png" id="10_ah73p"]
@@ -308,6 +309,9 @@ death_screen = NodePath("../../Death_screen")
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("6_yceh7")
 
+[node name="Avto_Fire" type="Node" parent="StateMachine"]
+script = ExtResource("9_23yx3")
+
 [node name="main_body" type="Sprite2D" parent="."]
 
 [node name="thrusters" type="AnimatedSprite2D" parent="."]
@@ -334,6 +338,20 @@ offset_right = -44.0
 offset_bottom = -19.0
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -40)
+rotation = 1.5707964
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(-22, -18)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+position = Vector2(23, -18)
+
+[node name="Marker2D4" type="Marker2D" parent="."]
+position = Vector2(-28, 0)
+rotation = -6.2831855
+
+[node name="Marker2D5" type="Marker2D" parent="."]
+position = Vector2(25, 0)
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
